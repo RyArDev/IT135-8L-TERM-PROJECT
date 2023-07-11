@@ -1,9 +1,11 @@
 <?php 
 
+    //Gets the uri of the current URL and removes any unnecessary characters
     $requestUrl = $_SERVER['REQUEST_URI'];
     $requestUrl = strtok($requestUrl, '?');
     $requestUrl = trim($requestUrl, '/');
 
+    //Lists of all URI routes with the corresponding PHP file
     $routes = [
         '' => 'components/homepage/homepage.php',
         'admin' => 'components/admin-dashboard/admin-dashboard.php',
@@ -18,15 +20,16 @@
         'profile' => 'components/user-page/user-page.php',
     ];
 
+    //Checks to see if the current URI exists from the routes lists
     if (array_key_exists($requestUrl, $routes)) {
         
-        $page = $routes[$requestUrl];
+        $page = $routes[$requestUrl]; //Content Page
 
     } else {
 
-        require('components/error-page/error-page.php');
+        require('components/error-page/error-page.php'); //Error Page
 
     }
 
-    require('global.php');
+    require('global.php'); //Base HTML page
 ?>

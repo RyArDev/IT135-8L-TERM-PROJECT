@@ -1,0 +1,17 @@
+name: Branch Protection
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  branch-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if branch is "Pulgar"
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/Pulgar" ]; then
+            echo "Only push and merge commits are allowed to the 'Pulgar' branch."
+            exit 1
+          fi

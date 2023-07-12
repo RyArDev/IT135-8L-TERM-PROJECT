@@ -4,5 +4,5 @@
 ?>
 
 <div>
-    This is the register page!
+    This is the registration page!
 </div>

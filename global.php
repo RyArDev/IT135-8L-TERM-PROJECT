@@ -1,3 +1,9 @@
+<?php
+    //Checks if the user is logged in before.
+    include_once('utilities/authentication/auth-controller.php');
+    $user = checkUserLogin();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +16,7 @@
         <title>Your Website Title</title>
         <link rel="icon" href="favicon.ico" type="image/ico">
         
-        <!-- Link to CSS -->
+        <!-- Link to Global CSS and Bootstrap -->
         <link rel="stylesheet" type="text/css" href="global.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
@@ -26,18 +32,36 @@
                     <li><a href="/contact-us">Contact Us</a></li>
                     <li><a href="/forum">Forum</a></li>
                     <li><a href="/history">History</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
                     <li><a href="/services">Services</a></li>
-                    <li><a href="/profile">Profile Page</a></li>
+                    <?php
+                        if(isset($_SESSION['user_id'])){
+
+                            echo "<li><a href='/profile'>" . $user['username'] . "</a></li>" .
+                            "<li><a href='utilities/authentication/logout.php'>Logout</a></li>";
+
+                        }else{
+
+                            echo "<li><a href='/login'>Login</a></li>" . 
+                            "<li><a href='/register'>Register</a></li>";
+
+                        }
+                    ?>
                 </ul>
             </nav>
         </header>
         
         <!-- This is where all sub pages content are located -->
-        <div class="content">
+        <div class="page-content">
             <?php 
-                if(isset($page) && file_exists($page)) require($page); 
+                if(isset($page) && file_exists($page)) {
+
+                    require($page); 
+
+                }else{
+
+                    require($errorPage);
+
+                }
             ?>
         </div>
 

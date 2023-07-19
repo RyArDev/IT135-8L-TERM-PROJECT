@@ -1,0 +1,72 @@
+{
+    "DATABASE":{
+        "Type": "mysql",
+        "Host": "localhost",
+        "Port": 3307,
+        "User": "root",
+        "Password": "root",
+        "Name": "barangay_sta_cruz"
+    },
+    "FILE_DIRECTORY":{
+        "Images":{
+            "User": "assets/images/users/",
+            "Announcement": "assets/images/announcements/",
+            "Forum": "assets/images/forums/",
+            "Comment": "assets/images/comments/"
+        },
+        "Videos":{
+            "Profile": "assets/videos/users/",
+            "Announcement": "assets/videos/announcements/",
+            "Forum": "assets/videos/forums/",
+            "Comment": "assets/videos/comments/"
+        },
+        "Files":{
+            "Profile": "assets/files/users/",
+            "Announcement": "assets/files/announcements/",
+            "Forum": "assets/files/forums/",
+            "Comment": "assets/files/comments/"
+        }
+    },
+    "ROUTES":{
+        "":"components/homepage/homepage.php",
+        "home":"components/homepage/homepage.php",
+        "admin": "components/admin-dashboard/admin-dashboard.php",
+        "announcement":"components/announcement/announcement.php",
+        "barangay":"components/barangay-corner/barangay-corner.php",
+        "contact-us":"components/contact-us/contact-us.php",
+        "forum":"components/forum/forum.php",
+        "history":"components/history/history.php",
+        "login":"components/login/login.php",
+        "register":"components/register/register.php",
+        "services":"components/services/services.php",
+        "profile":"components/user-page/user-page.php"
+    },
+    "CSS_LIST":{
+        "homepage":"components/homepage/homepage.css",
+        "alert":"components/alert/alert.css",
+        "admin-dashboard": "components/admin-dashboard/admin-dashboard.css",
+        "announcement":"components/announcement/announcement.css",
+        "barangay-corner":"components/barangay-corner/barangay-corner.css",
+        "contact-us":"components/contact-us/contact-us.css",
+        "forum":"components/forum/forum.css",
+        "history":"components/history/history.css",
+        "login":"components/login/login.css",
+        "register":"components/register/register.css",
+        "services":"components/services/services.css",
+        "user-page":"components/user-page/user-page.css"
+    },
+    "JS_LIST":{
+        "homepage":"components/homepage/homepage.js",
+        "alert":"components/alert/alert.js",
+        "admin-dashboard": "components/admin-dashboard/admin-dashboard.js",
+        "announcement":"components/announcement/announcement.js",
+        "barangay-corner":"components/barangay-corner/barangay-corner.js",
+        "contact-us":"components/contact-us/contact-us.js",
+        "forum":"components/forum/forum.js",
+        "history":"components/history/history.js",
+        "login":"components/login/login.js",
+        "register":"components/register/register.js",
+        "services":"components/services/services.js",
+        "user-page":"components/user-page/user-page.js"
+    }
+}

@@ -156,13 +156,19 @@
 
         if(!validateJobTitle($userEditProfile->jobTitle)){
 
-            $errors[] = "Invalid Job Title (4 - 32 characters).";
+            $errors[] = "Invalid Job Title (4 - 64 characters).";
 
         }
 
         if(!validateJobDescription($userEditProfile->jobDescription)){
 
-            $errors[] = "Invalid Job Description (12 - 64 characters).";
+            $errors[] = "Invalid Job Description (12 - 500 characters).";
+
+        }
+
+        if(!validateUserDescription($userEditProfile->description)){
+
+            $errors[] = "Invalid User Description (12 - 2500 characters).";
 
         }
 
@@ -548,8 +554,8 @@
 
         }
 
-        // Maximum length of 4 - 32 characters
-        if (strlen($jobTitle) < 4 || strlen($jobTitle) > 32) {
+        // Maximum length of 4 - 64 characters
+        if (strlen($jobTitle) < 4 || strlen($jobTitle) > 64) {
 
             return false;
 
@@ -568,8 +574,8 @@
 
         }
 
-        // Maximum length of 12 - 64 characters
-        if (strlen($jobDescription) < 12 || strlen($jobDescription) > 64) {
+        // Maximum length of 12 - 500 characters
+        if (strlen($jobDescription) < 12 || strlen($jobDescription) > 500) {
 
             return false;
 
@@ -577,6 +583,26 @@
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
         return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $jobDescription);
+
+    }
+
+    function validateUserDescription($userDescription){
+
+        if(empty($userDescription)){
+
+            return true;
+
+        }
+
+        // Maximum length of 12 - 2500 characters
+        if (strlen($userDescription) < 12 || strlen($userDescription) > 2500) {
+
+            return false;
+
+        }
+        
+        // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
+        return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $userDescription);
 
     }
 

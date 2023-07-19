@@ -153,7 +153,7 @@
                 $user->birthDate,
                 $user->address,
                 $user->gender,
-                "0",
+                null,
                 "Not Available",
                 "Not Available",
                 "Test123",

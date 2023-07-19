@@ -495,14 +495,49 @@
 
         // Check if the address length is between 12 and 128 characters
         $addressLength = strlen($address);
+        
         if ($addressLength < 12 || $addressLength > 128) {
 
             return false;
 
         }
 
-        // If the address length is within the allowed range, it is valid
+        // Split the address into its individual parts
+        $addressParts = explode(', ', $address);
+
+        // Check if all the required address parts are present
+        if (count($addressParts) < 4) {
+
+            return false;
+
+        }
+
+        if(count($addressParts) !== 5){
+
+            list($address1, $city, $state, $zip) = explode(', ', $address);
+
+        }else{
+
+            list($address1, $address2, $city, $state, $zip) = explode(', ', $address);
+
+        }
+
+        // Check if any part is empty (optional parts)
+        if (empty($address1) || empty($city) || empty($state) || empty($zip)) {
+
+            return false;
+
+        }
+
+        // Additional validation for zip code: Check if it contains only digits
+        if (!ctype_digit($zip)) {
+
+            return false;
+            
+        }
+
         return true;
+
     }
 
     function validateGender($gender){

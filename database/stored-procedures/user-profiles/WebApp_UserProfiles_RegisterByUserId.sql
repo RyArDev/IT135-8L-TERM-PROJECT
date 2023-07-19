@@ -17,6 +17,11 @@ CREATE PROCEDURE WebApp_UserProfiles_RegisterByUserId(
     IN param_user_id INT(11)
 )
 BEGIN
+
+    IF param_phone_number = "" OR param_phone_number = NULL THEN
+        SET param_phone_number = NULL;
+    END IF;
+
     INSERT INTO user_profiles (
         first_name,
         last_name,

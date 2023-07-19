@@ -43,9 +43,13 @@
 
         }
 
-        if(isset($_POST['address2']) && $_POST['address2'] !== "" ){
+        if(isset($_POST['address2'])){
 
             $fullAddress .= $_POST['address2'].", ";
+
+        }else{
+
+            $fullAddress .= ", ";
 
         }
 
@@ -57,7 +61,13 @@
 
         if(isset($_POST['stateProvince']) && $_POST['stateProvince'] !== "" ){
             
-            $fullAddress .= $_POST['stateProvince'];
+            $fullAddress .= $_POST['stateProvince'].", ";
+            
+        }
+
+        if(isset($_POST['zipCode']) && $_POST['zipCode'] !== "" ){
+            
+            $fullAddress .= $_POST['zipCode'];
             
         }
 
@@ -130,7 +140,7 @@
         <input type="email" id="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : null; ?>" required><br><br>
         
         <label for="birthDate">Birth Date:</label>
-        <input type="date" id="birthDate" name="birthDate" placeholder="Birth Date" value="<?php echo isset($_POST['email']) ? $_POST['email'] : null; ?>" required><br><br>
+        <input type="date" id="birthDate" name="birthDate" placeholder="Birth Date" value="<?php echo isset($_POST['birthDate']) ? $_POST['birthDate'] : null; ?>" required><br><br>
         
         <label for="address1">Address:</label>
         <input type="text" id="address1" name="address1" placeholder="Address Line 1" value="<?php echo isset($_POST['address1']) ? $_POST['address1'] : null; ?>" required><br>
@@ -141,6 +151,9 @@
         
         <label for="state">State/Province:</label>
         <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($_POST['stateProvince']) ? $_POST['stateProvince'] : null; ?>" required><br><br>
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value="<?php echo isset($_POST['zipCode']) ? $_POST['zipCode'] : null; ?>" required><br><br>
 
         <label for="gender">Gender:</label>
         <select name="gender" id="gender" required>

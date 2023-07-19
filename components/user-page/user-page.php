@@ -81,7 +81,13 @@
 
             if(isset($_POST['stateProvince'])){
                 
-                $fullAddress .= $_POST['stateProvince'];
+                $fullAddress .= $_POST['stateProvince'].", ";
+            }
+
+            if(isset($_POST['zipCode'])){
+            
+                $fullAddress .= $_POST['zipCode'];
+                
             }
 
             $userProfileEdit->address = $fullAddress;
@@ -332,14 +338,17 @@
         <input type="date" id="birthDate" name="birthDate" value="<?php echo $userProfile['birth_date']; ?>" placeholder="Birth Date" required><br><br>
         
         <label for="address1">Address:</label>
-        <input type="text" id="address1" name="address1" placeholder="Address Line 1" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 4)[0] : null; ?>" required><br>
-        <input type="text" id="address2" name="address2" placeholder="Address Line 2" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 4)[1] : null; ?>"><br><br>
+        <input type="text" id="address1" name="address1" placeholder="Address Line 1" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[0] : null; ?>" required><br>
+        <input type="text" id="address2" name="address2" placeholder="Address Line 2" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[1] : null; ?>"><br><br>
         
         <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="City" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 4)[2] : null; ?>" required><br><br>
+        <input type="text" id="city" name="city" placeholder="City" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[2] : null; ?>" required><br><br>
         
         <label for="stateProvince">State/Province:</label>
-        <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 4)[3] : null; ?>" required><br><br>
+        <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[3] : null; ?>" required><br><br>
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[4] : null; ?>" required><br><br>
 
         <label for="gender">Gender:</label>
         <select name="gender" id="gender" required>

@@ -74,7 +74,11 @@
     }
 
     // Check for the register status and show the alert if successful
-    if (isset($_SESSION['register_success']) && $_SESSION['register_success']) {
+    if (isset($_SESSION['register_success']) && 
+        $_SESSION['register_success'] &&
+        isset($_SESSION['alert_message']) &&
+        isset($_SESSION['alert_type'])
+    ) {
 
         showAlert($_SESSION['alert_message'],  $_SESSION['alert_type']);
         unset($_SESSION['login_success']);

@@ -570,6 +570,12 @@
 
         }
 
+        if($phoneNumber === null){
+
+            return true;
+
+        }
+
         if(verifyUserPhoneNumber($userId, $phoneNumber)['phone_number_count'] > 0){
 
             return false;

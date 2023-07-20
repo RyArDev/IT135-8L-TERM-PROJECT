@@ -13,6 +13,14 @@
 
             }
 
+            $activeStatus = updateUserStatusById($_SESSION['user_id'], 1);
+
+            if(!$activeStatus){
+
+                return null;
+
+            }
+
             return getUserById($_SESSION['user_id']);
 
         } catch (Exception $e) {

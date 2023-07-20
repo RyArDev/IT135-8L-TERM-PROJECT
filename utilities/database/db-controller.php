@@ -1,12 +1,12 @@
 <?php
-    require_once('utilities/error/controller-error-handler.php');
+    require_once(dirname(dirname(__DIR__)).'/utilities/error/controller-error-handler.php');
 
     function executeQuery($query, $params = []) {
         
         try {
 
             // Requires Database connection
-            require('utilities/database/db-connection.php');
+            require(dirname(dirname(__DIR__)).'/utilities/database/db-connection.php');
     
             // Start a transaction
             mysqli_begin_transaction($dbConnection, MYSQLI_TRANS_START_READ_WRITE);
@@ -82,7 +82,7 @@
     function executeStoredProcedure($procedureName, $params = []) {
         try {
             // Requires Database connection
-            require('utilities/database/db-connection.php');
+            require(dirname(dirname(__DIR__)).'/utilities/database/db-connection.php');
     
             // Start a transaction
             mysqli_begin_transaction($dbConnection, MYSQLI_TRANS_START_READ_WRITE);

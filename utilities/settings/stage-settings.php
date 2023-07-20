@@ -6,11 +6,11 @@
     
         if($settings['STAGE'] == "Production"){
             
-            return 'utilities/settings/config-production.json';
+            return dirname(dirname(__DIR__)).'/utilities/settings/config-production.json';
     
         }
 
-        return 'utilities/settings/config-development.json';
+        return dirname(dirname(__DIR__)).'/utilities/settings/config-development.json';
 
     }
 

@@ -1,8 +1,8 @@
 <?php 
 
-    require_once('utilities/database/db-controller.php');
-    require_once('entities/user/user-model.php');
-    require_once('utilities/error/controller-error-handler.php');
+    require_once(dirname(dirname(__DIR__)).'/utilities/database/db-controller.php');
+    require_once(dirname(dirname(__DIR__)).'/entities/user/user-model.php');
+    require_once(dirname(dirname(__DIR__)).'/utilities/error/controller-error-handler.php');
 
     function getUserById($userId){
 
@@ -180,6 +180,33 @@
         } catch (PDOException $e) {
             
             echo "Adding User To Database Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function updateUserStatusById($user_id, $status){
+
+        try {
+
+            //Queries the results
+            $params = [$user_id, $status];
+
+            //Queries the results
+            $result = executeStoredProcedure("WebApp_Users_UpdateStatusById", $params);
+
+            if (!$result) {
+
+                return false;
+
+            }
+
+            return true;
+
+        } catch (PDOException $e) {
+            
+            echo "Updating User Status By Id Failed: " . $e->getMessage();
             return;
 
         }

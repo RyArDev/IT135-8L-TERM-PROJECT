@@ -1,5 +1,5 @@
 <?php
-    require_once('utilities/settings/stage-settings.php');
+    require_once(dirname(dirname(__DIR__)).'/utilities/settings/stage-settings.php');
 
     $config = json_decode(file_get_contents(getConfigFile()), true);
 

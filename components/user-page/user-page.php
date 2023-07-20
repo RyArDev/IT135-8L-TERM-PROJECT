@@ -92,7 +92,7 @@
 
             $userProfileEdit->address = $fullAddress;
             $userProfileEdit->gender = isset($_POST['gender']) ? $_POST['gender'] : null;
-            $userProfileEdit->phoneNumber = isset($_POST['phoneNumber']) ? $_POST['phoneNumber'] : null;
+            $userProfileEdit->phoneNumber = isset($_POST['phoneNumber']) && $_POST['phoneNumber'] !== "" ? $_POST['phoneNumber'] : null;
             $userProfileEdit->jobTitle = isset($_POST['jobTitle']) && !empty($_POST['jobTitle']) ? $_POST['jobTitle'] : null;
             $userProfileEdit->jobDescription = isset($_POST['jobDescription']) && !empty($_POST['jobDescription']) ? $_POST['jobDescription'] : null;
             $userProfileEdit->profileImageName = null;
@@ -266,7 +266,11 @@
     }
 
     // Check for the login status and show the alert if successful
-    if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
+    if (isset($_SESSION['login_success']) && 
+        $_SESSION['login_success'] &&
+        isset($_SESSION['alert_message']) &&
+        isset($_SESSION['alert_type'])
+    ) {
 
         showAlert($_SESSION['alert_message'],  $_SESSION['alert_type']);
         unset($_SESSION['login_success']);
@@ -276,7 +280,11 @@
     }
 
     // Check for the update status and show the alert if successful
-    if (isset($_SESSION['update_success']) && $_SESSION['update_success']) {
+    if (isset($_SESSION['update_success']) && 
+        $_SESSION['update_success'] &&
+        isset($_SESSION['alert_message']) &&
+        isset($_SESSION['alert_type'])
+    ) {
 
         showAlert($_SESSION['alert_message'],  $_SESSION['alert_type']);
         unset($_SESSION['update_success']);
@@ -289,7 +297,7 @@
 
         updateUserAndProfile($user, $userProfile);
 
-        if ($_SESSION['update_success']) {
+        if (isset($_SESSION['update_success']) && $_SESSION['update_success']) {
             
             echo '<script>window.location.href = window.location.href;</script>';
 
@@ -358,7 +366,7 @@
         </select><br><br>
         
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" value="<?php echo $userProfile['phone_number']; ?>" placeholder="Phone Number" required><br><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" value="<?php echo $userProfile['phone_number']; ?>" placeholder="Phone Number"><br><br>
 
         <label for="jobTitle">Job Title:</label>
         <input type="text" id="jobTitle" name="jobTitle" value="<?php echo $userProfile['job_title']; ?>" placeholder="Job Title"><br><br>

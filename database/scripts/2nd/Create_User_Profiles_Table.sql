@@ -7,7 +7,7 @@ CREATE TABLE user_profiles (
     gender VARCHAR(16) NOT NULL,
     phone_number VARCHAR(50) NULL UNIQUE,
     job_title VARCHAR(64) DEFAULT 'Not Available',
-    job_description VARCHAR(500) DEFAULT 'Not Available',
+    job_description VARCHAR(2500) DEFAULT 'Not Available',
     profile_image_name VARCHAR(64) NOT NULL,
     profile_image_url VARCHAR(128) NOT NULL,
     banner_image_name VARCHAR(64) NOT NULL,

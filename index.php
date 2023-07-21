@@ -15,4 +15,5 @@
 
     require('global.php'); //Base HTML page
     require_once('utilities/authentication/auth-controller.php'); //Authenticate User Session
+    require_once('vendor/autoload.php'); //This loads project dependencies from Composer
 ?>

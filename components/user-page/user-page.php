@@ -99,6 +99,7 @@
             $userProfileEdit->profileImageUrl = null;
             $userProfileEdit->profileBannerName = null;
             $userProfileEdit->profileBannerUrl = null;
+            $userProfileEdit->description = isset($_POST['userDescription']) && !empty($_POST['userDescription']) ? $_POST['userDescription'] : null;
 
             $userEdit = sanitizeClass($userEdit);
             $userProfileEdit = sanitizeClass($userProfileEdit);
@@ -308,9 +309,10 @@
 ?>
 
 <div id="userProfile">
-<?php echo "<img src='". $userProfile['banner_image_url'] . "' width='970px' height='250px'/>" ?><br/>
+    <?php echo "<img src='". $userProfile['banner_image_url'] . "' width='970px' height='250px'/>" ?><br/>
     <?php echo "<img src='". $userProfile['profile_image_url'] . "' width='200px' height='200px'/>" ?>
     Hello <?php echo $user['username'] ?><br>
+    <?php echo htmlspecialchars_decode($userProfile['description']); ?><br/><br/>
     <button onclick="toggleForm('editUserForm')">Edit Profile</button>
     <button onclick="toggleForm('changePasswordForm')">Change Password</button>
 </div>
@@ -401,4 +403,5 @@
     require_once('utilities/validation/server/js-validation.php');
     import_js("user-page");
     import_js("alert");
+    import_ckEditor([["userDescription", 2500],["jobDescription",2500]]);
 ?>

@@ -47,8 +47,9 @@ To set up the project locally and start using the website with XAMPP, follow the
 5. Access phpMyAdmin through `http://localhost/phpmyadmin` and create a new database for the website.
 6. Import the provided SQL file into the newly created database to set up the necessary tables and data.
 7. Configure the database connection settings in the website's configuration files.
-8. Open a web browser and access the website at `http://localhost/your-project-folder` or `http://localhost`.
-9. You can now start using and modifying the website locally using XAMPP.
+8. Do composer install to download the dependencies of the project
+9. Open a web browser and access the website at `http://localhost/your-project-folder` or `http://localhost`.
+10. You can now start using and modifying the website locally using XAMPP.
 
 ## Contributing
 

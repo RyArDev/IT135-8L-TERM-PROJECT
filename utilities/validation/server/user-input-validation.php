@@ -2,6 +2,7 @@
 
     require_once('utilities/database/db-controller.php');
     require_once('entities/user/user-model.php');
+    require_once('plugins/html-purifier.php');
 
     function validateUserRegistration(UserRegister $userRegister){
 
@@ -615,15 +616,17 @@
 
         }
 
-        // Maximum length of 12 - 500 characters
-        if (strlen($jobDescription) < 12 || strlen($jobDescription) > 500) {
+        // Maximum length of 12 - 2500 characters
+        if (strlen($jobDescription) < 12 || strlen($jobDescription) > 2500) {
 
             return false;
 
         }
+
+        $jobDescription = cleanHtml($jobDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $jobDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $jobDescription);
 
     }
 
@@ -641,9 +644,11 @@
             return false;
 
         }
+
+        $userDescription = cleanHtml($userDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $userDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $userDescription);
 
     }
 

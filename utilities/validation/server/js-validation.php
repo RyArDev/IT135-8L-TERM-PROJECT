@@ -5,37 +5,37 @@
 
     function import_js($name){
         
-        // Read the JSON file 
-        $json = file_get_contents(getConfigFile());
-        
-        // Decode the JSON file
-        $jsLinks = json_decode($json, true);
+        // Read and Decode the JSON file 
+        $config = json_decode(file_get_contents(getConfigFile()), true);
 
         //Check if the name exists in the json list
-        if (array_key_exists($name, $jsLinks['JS_LIST'])) {
+        if (array_key_exists($name, $config['JS_LIST'])) {
 
-            echo "<script defer src='" . $jsLinks['JS_LIST'][$name] . "'></script>";
+            echo "<script defer src='" . $config['JS_LIST'][$name] . "'></script>";
 
         }
 
     }
 
     function import_ckEditor($editors) {
+        
         echo "<script src='https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js'></script>";
-    
+
         // Loop through each editor ID and initialize CKEditor
         foreach ($editors as $editor) {
 
             $id = $editor[0];
             $characterLimit = $editor[1];
-
+            $ckUploadPath = 'plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json';
+            
             echo "<script>";
-            echo "ClassicEditor.create(document.querySelector('#$id'))";
-            echo ".then(editor => {";
-            echo "editor.ui.view.editable.element.setAttribute('maxlength', '$characterLimit');"; // Set max length to 5000 characters
-            echo "})";
-            echo ".catch(error => {";
-            echo "console.error(error);";
+            echo "ClassicEditor.create(document.querySelector('#$id'), {";
+            echo "  maxLength: {";
+            echo "    maxLength: $characterLimit";
+            echo "  },";
+            echo "  ckfinder: {";
+            echo "    uploadUrl: '$ckUploadPath'";
+            echo "  },";
             echo "})";
             echo "</script>";
         }

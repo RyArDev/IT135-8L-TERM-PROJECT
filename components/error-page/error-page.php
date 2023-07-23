@@ -10,6 +10,7 @@
     //Checks if the user is logged in before.
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
+    $_SESSION['current_page'] = "error";
 ?>
 
 <div>

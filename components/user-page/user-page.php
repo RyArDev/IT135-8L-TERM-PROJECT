@@ -7,6 +7,7 @@
     //Checks if the user is logged in before.
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
+    $_SESSION['current_page'] = "user";
 
     if(!isset($user['user_id'])){
 
@@ -18,7 +19,7 @@
 
     if(!isset($userProfile['user_profile_id'])){
 
-        header("Location: ");
+        header("Location: login");
         
     }
 
@@ -403,5 +404,8 @@
     require_once('utilities/validation/server/js-validation.php');
     import_js("user-page");
     import_js("alert");
-    import_ckEditor([["userDescription", 2500],["jobDescription",2500]]);
+    import_ckEditor([
+        ["userDescription", 2500],
+        ["jobDescription", 2500]
+    ]);
 ?>

@@ -5,16 +5,13 @@
 
     function import_css($name){
         
-        // Read the JSON file 
-        $json = file_get_contents(getConfigFile());
-        
-        // Decode the JSON file
-        $cssLinks = json_decode($json, true);
+        // Read and Decode the JSON file 
+        $config = json_decode(file_get_contents(getConfigFile()), true);
 
         //Check if the name exists in the json list
-        if (array_key_exists($name, $cssLinks['CSS_LIST'])) {
+        if (array_key_exists($name, $config['CSS_LIST'])) {
 
-            echo "<link rel='stylesheet' type='text/css' href='" . $cssLinks['CSS_LIST'][$name] . "' media='screen' />";
+            echo "<link rel='stylesheet' type='text/css' href='" . $config['CSS_LIST'][$name] . "' media='screen' />";
 
         }else{
 

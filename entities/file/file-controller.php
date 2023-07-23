@@ -11,10 +11,10 @@
 
             $fileNameParts = explode('.', $image->name);
             $fileExt = strtolower(end($fileNameParts));
-            $config = json_decode(file_get_contents(getConfigFile(), true));
+            $config = json_decode(file_get_contents(getConfigFile()), true);
             
             // Move the uploaded file to its final destination
-            $uploadDirectory = $config->FILE_DIRECTORY->Images->User . $userProfile->userId . "/";
+            $uploadDirectory = $config['FILE_DIRECTORY']['Images']['User'] . $userProfile->userId . "/";
             $newFileName = uniqid("profile_", true) . "." . $fileExt;
             $imagePath = $uploadDirectory . $newFileName;
 
@@ -64,10 +64,10 @@
 
             $fileNameParts = explode('.', $image->name);
             $fileExt = strtolower(end($fileNameParts));
-            $config = json_decode(file_get_contents(getConfigFile(), true));
+            $config = json_decode(file_get_contents(getConfigFile()), true);
             
             // Move the uploaded file to its final destination
-            $uploadDirectory = $config->FILE_DIRECTORY->Images->User . $userProfile->userId . "/";
+            $uploadDirectory = $config['FILE_DIRECTORY']['Images']['User'] . $userProfile->userId . "/";
             $newFileName = uniqid("banner_", true) . "." . $fileExt;
             $imagePath = $uploadDirectory . $newFileName;
 

@@ -300,6 +300,18 @@
 
             }
 
+            if (is_dir($uploadDirectory)) {
+
+                $files = array_diff(scandir($uploadDirectory), array('.', '..'));
+                
+                if(empty($files)){
+
+                    rmdir($uploadDirectory);
+
+                }
+
+            }
+
         } catch (Exception $e) {
 
             echo "Cleaning up Image Directory Failed: " . $e->getMessage();
@@ -310,67 +322,110 @@
 
     function getEmbedContent($embedUrl, $app) { //API Controller Folder if expansion for maintainability
         
-        $config = json_decode(file_get_contents(getConfigFile()), true);
-        $id = null;
+        try {
 
-        $app = ucwords($app);
-        $apiKey = $config['API_KEYS'][$app]['Key']; 
-        $url = $config['API_KEYS'][$app]['Url'];
+            $config = json_decode(file_get_contents(getConfigFile()), true);
+            $id = null;
 
-        switch($app){
+            $app = ucwords($app);
+            $apiKey = $config['API_KEYS'][$app]['Key']; 
+            $url = $config['API_KEYS'][$app]['Url'];
 
-            case 'Youtube':{
+            switch($app){
 
-                $patterns = [
-                    '/youtube\.com\/watch\?v=([^&]+)/i', // Full YouTube URL
-                    '/youtu\.be\/([^&]+)/i', // Short YouTube URL
-                ];
+                case 'Youtube':{
 
-                foreach ($patterns as $pattern) {
+                    $patterns = [
+                        '/youtube\.com\/watch\?v=([^&]+)/i', // Full YouTube URL
+                        '/youtu\.be\/([^&]+)/i', // Short YouTube URL
+                    ];
 
-                    if (preg_match($pattern, $embedUrl, $matches)) {
-        
-                        $id = $matches[1];
-                        break;
-        
+                    foreach ($patterns as $pattern) {
+
+                        if (preg_match($pattern, $embedUrl, $matches)) {
+            
+                            $id = $matches[1];
+                            break;
+            
+                        }
+            
                     }
-        
-                }
-        
-                $apiUrl = $url . "?part=player&id=" . $id . "&key=" . $apiKey;
+            
+                    $apiUrl = $url . "?part=player&id=" . $id . "&key=" . $apiKey;
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $apiUrl);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $response = curl_exec($ch);
-                curl_close($ch);
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $apiUrl);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+                
+                    $data = json_decode($response, true);
+                
+                    // Check if the API call was successful and the 'player' field exists
+                    if (isset($data['items'][0]['player']['embedHtml'])) {
             
-                $data = json_decode($response, true);
+                        return $data['items'][0]['player']['embedHtml'];
             
-                // Check if the API call was successful and the 'player' field exists
-                if (isset($data['items'][0]['player']['embedHtml'])) {
-        
-                    return $data['items'][0]['player']['embedHtml'];
-        
-                } else {
-        
-                    // Return null if there was an error or 'embedHtml' field is missing
+                    } else {
+            
+                        // Return null if there was an error or 'embedHtml' field is missing
+                        return null;
+            
+                    }
+
+                    break;
+                }
+
+                default:{
+
                     return null;
-        
+                    break;
+
                 }
 
-                break;
             }
 
-            default:{
+        } catch (Exception $e) {
 
-                return null;
-                break;
-
-            }
+            echo "Getting Embed Content Failed: " . $e->getMessage();
 
         }
         
+    }
+
+    function deleteFolder($folderPath) {
+        
+        try{
+
+            if (is_dir($folderPath)) {
+                
+                $files = array_diff(scandir($folderPath), array('.', '..'));
+        
+                foreach ($files as $file) {
+                    
+                    $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
+                    
+                    if (is_dir($filePath)) {
+                        
+                        deleteFolder($filePath); // Recursively delete subdirectories
+                    
+                    } else {
+                        
+                        unlink($filePath); // Delete files
+
+                    }
+                }
+        
+                rmdir($folderPath);
+
+            }
+            
+        } catch (Exception $e) {
+
+            echo "Deleting Folder Failed: " . $e->getMessage();
+
+        }
+    
     }
 
 ?>

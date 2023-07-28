@@ -38,7 +38,7 @@
 
         $errors = array();
         
-        // Check the file size (2MB limit)
+        // Check the file size (5MB limit)
         $maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
         if ($image->size > $maxFileSize) {
 

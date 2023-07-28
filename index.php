@@ -13,6 +13,7 @@
 
     $errorPage = 'components/error-page/error-page.php'; //Error Page
 
+    require('utilities/settings/cookies.php'); //Setting Cookies
     require('global.php'); //Base HTML page
     require_once('utilities/authentication/auth-controller.php'); //Authenticate User Session
     require_once('vendor/autoload.php'); //This loads project dependencies from Composer

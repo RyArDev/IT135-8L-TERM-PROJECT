@@ -10,11 +10,39 @@
     //Checks if the user is logged in before.
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
-    $_SESSION['current_page'] = "admin";
+    $_SESSION['current_page'] = "admin-dashboard";
 ?>
 
 <div>
-    Hello this is the admin dashboard!
+    Hello this is the User Moderation!
+</div>
+
+<div>
+    Hello this is the Announcement Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the Forum Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the Comments Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the Logs Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the Tickets Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the Forms Moderation with visuals!
+</div>
+
+<div>
+    Hello this is the List of Active Users Moderation!
 </div>
 
 <?php 

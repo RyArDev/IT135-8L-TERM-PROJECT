@@ -4,6 +4,60 @@
     require_once(dirname(dirname(__DIR__)).'/entities/user/user-model.php');
     require_once(dirname(dirname(__DIR__)).'/utilities/error/controller-error-handler.php');
 
+    function getAllUsers(){
+
+        try {
+
+            //Queries the results
+            $params = [];
+
+            //Queries the results
+            $results = executeStoredProcedure("WebApp_Users_GetAll", $params)[0];
+
+            if (empty($results)) {
+
+                return null;
+
+            }
+
+            return $results;
+
+        } catch (Exception $e) {
+            
+            echo "Getting All Users Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function getAllActiveUsers(){
+
+        try {
+
+            //Queries the results
+            $params = [];
+
+            //Queries the results
+            $results = executeStoredProcedure("WebApp_Users_GetAllActive", $params)[0];
+
+            if (empty($results)) {
+
+                return null;
+
+            }
+
+            return $results;
+
+        } catch (Exception $e) {
+            
+            echo "Getting All Active Users Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+    
     function getUserById($userId){
 
         try {
@@ -22,7 +76,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Getting User By Id Failed: " . $e->getMessage();
             return;
@@ -49,7 +103,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Getting User Profile By Id Failed: " . $e->getMessage();
             return;
@@ -76,7 +130,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Getting User By Id Failed: " . $e->getMessage();
             return;
@@ -103,7 +157,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Getting Password By Id Failed: " . $e->getMessage();
             return;
@@ -130,7 +184,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Getting Password By Username Failed: " . $e->getMessage();
             return;
@@ -177,7 +231,7 @@
 
             return true;
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Adding User To Database Failed: " . $e->getMessage();
             return;
@@ -204,7 +258,7 @@
 
             return true;
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Updating User Status By Id Failed: " . $e->getMessage();
             return;
@@ -235,7 +289,7 @@
 
             return true;
             
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Updating User Information Failed: " . $e->getMessage();
             return;
@@ -277,7 +331,7 @@
 
             return true;
             
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Updating User Profile Information Failed: " . $e->getMessage();
             return;
@@ -306,7 +360,7 @@
 
             return true;
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
                 
             echo "Updating User Password Failed: " . $e->getMessage();
             return;
@@ -333,7 +387,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Verifying User Email Failed: " . $e->getMessage();
             return;
@@ -360,7 +414,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Verifying User Email Failed: " . $e->getMessage();
             return;
@@ -387,7 +441,7 @@
 
             return $result[0];
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             
             echo "Verifying User Email Failed: " . $e->getMessage();
             return;

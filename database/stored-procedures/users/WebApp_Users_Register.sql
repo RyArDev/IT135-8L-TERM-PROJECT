@@ -11,7 +11,7 @@ CREATE PROCEDURE WebApp_Users_Register(
     IN param_gender VARCHAR(16),
     IN param_phone_number VARCHAR(50),
     IN param_job_title VARCHAR(64),
-    IN param_job_description VARCHAR(500),
+    IN param_job_description VARCHAR(2500),
     IN param_refresh_token VARCHAR(32),
     IN param_date_created DATETIME,
     IN param_profile_image_name VARCHAR(64),

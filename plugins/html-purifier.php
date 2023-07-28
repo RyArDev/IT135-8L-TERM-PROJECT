@@ -9,7 +9,7 @@
 
         $config->set('HTML.Allowed', 
             'p,
-            a[href|title|media],
+            a[href|title],
             b,
             strong,
             i,
@@ -26,11 +26,10 @@
             thead,
             br,
             blockquote,
-            figure[class],
             h1,
             h2,
             h3,
-            h4
+            h4,
         ');
 
         $config->set('HTML.SafeIframe', true);

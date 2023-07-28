@@ -4,7 +4,7 @@
         "Host": "localhost",
         "Port": 3307,
         "User": "root",
-        "Password": "root",
+        "Password": "",
         "Name": "barangay_sta_cruz"
     },
     "FILE_DIRECTORY":{
@@ -68,5 +68,11 @@
         "register":"components/register/register.js",
         "services":"components/services/services.js",
         "user-page":"components/user-page/user-page.js"
+    },
+    "API_KEYS":{
+        "Youtube": {
+            "Key": "AIzaSyA_B7gr8lVszLOD096YGtBFiac7a7LhmiU",
+            "Url": "https://www.googleapis.com/youtube/v3/videos"
+        }
     }
 }

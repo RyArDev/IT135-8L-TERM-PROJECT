@@ -12,11 +12,21 @@
 
     }
 
+    class AnnouncementCreate{
+
+        public $title;
+        public $body;
+        public $userId;
+        public $announcementTypeId;
+
+    }
+
     class AnnouncementEdit{
 
         public $announcementId;
         public $title;
         public $body;
+        public $announcementTypeId;
 
     }
 

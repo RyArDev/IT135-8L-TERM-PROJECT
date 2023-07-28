@@ -21,7 +21,13 @@ ini_set('display_errors', 0);
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html
 
 $config = array();
-session_start();
+// Start the session (if it hasn't been started already)
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Get the current_page value from $_SESSION
+$current_page = isset($_SESSION['current_page']) ? $_SESSION['current_page'] : '';
 
 /*============================ Enable PHP Connector HERE ==============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_authentication
@@ -64,220 +70,15 @@ $config['images'] = array(
 /*=================================== Backends ========================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_backends
 
-switch($_SESSION['current_page']){
-
-    case 'admin':{
-
-        $config['backends'][] = array(
-            'name'         => 'user',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/admin-dashboard/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'announcement':{
-
-        $config['backends'][] = array(
-            'name'         => 'announcement',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/announcements/'.$_SESSION['announcement_id'].'/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-        
-
-        break;
-    }
-
-    case 'barangay':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/barangay-corner/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'comment':{
-
-        $config['backends'][] = array(
-            'name'         => 'user',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/comments/'.$_SESSION['comment_id'].'/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'contact':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/contact-us/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'error':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/error-page/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'forum':{
-
-        $config['backends'][] = array(
-            'name'         => 'user',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/forums/'.$_SESSION['forum_id'].'/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'history':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/history/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-        
-        break;
-    }
-
-    case 'homepage':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/homepage/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'login':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/login/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'register':{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/register/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'services':{
-
-        $config['backends'][] = array(
-            'name'         => 'user',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/pages/services/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    case 'user':{
-
-        $config['backends'][] = array(
-            'name'         => 'user',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/images/users/'.$_SESSION['user_id'].'/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-    default:{
-
-        $config['backends'][] = array(
-            'name'         => 'default',
-            'adapter'      => 'local',
-            'baseUrl'      => '/assets/ckfinder',
-        //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-            'chmodFiles'   => 0777,
-            'chmodFolders' => 0755,
-            'filesystemEncoding' => 'UTF-8',
-        );
-
-        break;
-    }
-
-}
+$config['backends'][] = array(
+    'name'         => 'default',
+    'adapter'      => 'local',
+    'baseUrl'      => '/assets/ckfinder',
+//  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
+    'chmodFiles'   => 0777,
+    'chmodFolders' => 0755,
+    'filesystemEncoding' => 'UTF-8',
+);
 
 /*================================ Resource Types =====================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_resourceTypes

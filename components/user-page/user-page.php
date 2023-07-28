@@ -101,7 +101,7 @@
             $userProfileEdit->profileBannerName = null;
             $userProfileEdit->profileBannerUrl = null;
             $userProfileEdit->description = isset($_POST['userDescription']) && !empty($_POST['userDescription']) ? $_POST['userDescription'] : null;
-
+            
             $userEdit = sanitizeClass($userEdit);
             $userProfileEdit = sanitizeClass($userProfileEdit);
 
@@ -194,6 +194,11 @@
                 
             }
 
+            $previousImagePaths = array();
+            $userProfileEdit->description = sanitizeInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->description, "User", $previousImagePaths));
+            $userProfileEdit->jobDescription = sanitizeInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->jobDescription, "User", $previousImagePaths));
+            cleanUpCkFinderImageDirectory($userProfileEdit->userId, "User", $previousImagePaths);
+
             $userUpdateSuccess = updateUser($userEdit);
             $userProfileUpdateSuccess = updateUserProfileByUserId($userProfileEdit);
 
@@ -208,13 +213,8 @@
 
             $message = 'User Profile Updated Successfully!';
             $type = 'success';
-        
-            $user = checkUserLogin();
-            $userProfile = checkUserProfile();
 
-            $_SESSION['update_success'] = true;
-            $_SESSION['alert_message'] = $message;
-            $_SESSION['alert_type'] = $type;
+            showAlert($message, $type);
 
         }else if (isset($_POST["changePasswordForm"])) {
 
@@ -259,9 +259,7 @@
             $message = 'User Password Updated Successfully!';
             $type = 'success';
             
-            $_SESSION['update_success'] = true;
-            $_SESSION['alert_message'] = $message;
-            $_SESSION['alert_type'] = $type;
+            showAlert($message, $type);
 
         }
 
@@ -281,29 +279,12 @@
 
     }
 
-    // Check for the update status and show the alert if successful
-    if (isset($_SESSION['update_success']) && 
-        $_SESSION['update_success'] &&
-        isset($_SESSION['alert_message']) &&
-        isset($_SESSION['alert_type'])
-    ) {
-
-        showAlert($_SESSION['alert_message'],  $_SESSION['alert_type']);
-        unset($_SESSION['update_success']);
-        unset($_SESSION['alert_message']);
-        unset($_SESSION['alert_type']);
-
-    }
-
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         updateUserAndProfile($user, $userProfile);
 
-        if (isset($_SESSION['update_success']) && $_SESSION['update_success']) {
-            
-            echo '<script>window.location.href = window.location.href;</script>';
-
-        }
+        $user = checkUserLogin();
+        $userProfile = checkUserProfile();
         
     }
 
@@ -314,6 +295,7 @@
     <?php echo "<img src='". $userProfile['profile_image_url'] . "' width='200px' height='200px'/>" ?>
     Hello <?php echo $user['username'] ?><br>
     <?php echo htmlspecialchars_decode($userProfile['description']); ?><br/><br/>
+    <?php echo htmlspecialchars_decode($userProfile['job_description']); ?><br/><br/>
     <button onclick="toggleForm('editUserForm')">Edit Profile</button>
     <button onclick="toggleForm('changePasswordForm')">Change Password</button>
 </div>

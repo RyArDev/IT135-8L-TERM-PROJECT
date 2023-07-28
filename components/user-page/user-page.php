@@ -102,8 +102,8 @@
             $userProfileEdit->profileBannerUrl = null;
             $userProfileEdit->description = isset($_POST['userDescription']) && !empty($_POST['userDescription']) ? $_POST['userDescription'] : null;
             
-            $userEdit = sanitizeClass($userEdit);
-            $userProfileEdit = sanitizeClass($userProfileEdit);
+            $userEdit = sanitizeUserClass($userEdit);
+            $userProfileEdit = sanitizeUserClass($userProfileEdit);
 
             $userErrors = validateUser($userEdit);
             $userProfileErrors = validateUserProfile($userProfileEdit);
@@ -195,8 +195,8 @@
             }
 
             $previousImagePaths = array();
-            $userProfileEdit->description = sanitizeInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->description, "User", $previousImagePaths));
-            $userProfileEdit->jobDescription = sanitizeInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->jobDescription, "User", $previousImagePaths));
+            $userProfileEdit->description = sanitizeUserInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->description, "User", $previousImagePaths));
+            $userProfileEdit->jobDescription = sanitizeUserInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->jobDescription, "User", $previousImagePaths));
             cleanUpCkFinderImageDirectory($userProfileEdit->userId, "User", $previousImagePaths);
 
             $userUpdateSuccess = updateUser($userEdit);
@@ -226,8 +226,8 @@
             $userEditPassword->newPassword = isset($_POST['newPassword']) ? $_POST['newPassword'] : null;
             $userEditPassword->confirmNewPassword = isset($_POST['confirmNewPassword']) ? $_POST['confirmNewPassword'] : null;
             
-            $userEditPassword = sanitizeClass($userEditPassword);
-            $userPasswordErrors = validateUserPassword($userEditPassword);
+            $userEditPassword = sanitizeUserClass($userEditPassword);
+            $userPasswordErrors = validateUserEditPassword($userEditPassword);
 
             if (!empty($userPasswordErrors)) {
                 

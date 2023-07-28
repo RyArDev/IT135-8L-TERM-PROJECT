@@ -8,57 +8,57 @@
 
         $errors = array();
 
-        if(!validateUsername("register", $userRegister->username)){
+        if(!validateUserUsername("register", $userRegister->username)){
 
             $errors[] = "Invalid Username (4 - 16 characters).";
 
         }
 
-        if(!validateFirstName($userRegister->firstName)){
+        if(!validateUserFirstName($userRegister->firstName)){
 
             $errors[] = "Invalid First Name (2 - 48 characters).";
 
         }  
         
-        if(!validateLastName($userRegister->lastName)){
+        if(!validateUserLastName($userRegister->lastName)){
 
             $errors[] = "Invalid Last Name (2 - 48 characters).";
 
         }
 
-        if(!validateEmail("register", $userRegister->email)){
+        if(!validateUserEmail("register", $userRegister->email)){
 
             $errors[] = "Invalid Email.";
 
         }
 
-        if(!validatePassword($userRegister->password, $userRegister->confirmPassword)){
+        if(!validateUserPassword($userRegister->password, $userRegister->confirmPassword)){
 
             $errors[] = "Invalid Password.";
 
         }
 
-        $userRegister->password = hashPasswordWithSalt($userRegister->password);
+        $userRegister->password = hashUserPasswordWithSalt($userRegister->password);
 
-        if(!validateBirthDate($userRegister->birthDate)){
+        if(!validateUserBirthDate($userRegister->birthDate)){
 
             $errors[] = "Invalid Birth Date.";
 
         }
 
-        if(!validateAddress($userRegister->address)){
+        if(!validateUserAddress($userRegister->address)){
 
             $errors[] = "Invalid Home Address (12 - 128 characters).";
 
         }
 
-        if(!validateGender($userRegister->gender)){
+        if(!validateUserGender($userRegister->gender)){
 
             $errors[] = "Gender must be either 'Male', 'Female', or 'Other'";
 
         }
 
-        if(!validateAgreedToTerms($userRegister->agreeTerms)){
+        if(!validateUserAgreedToTerms($userRegister->agreeTerms)){
 
             $errors[] = "Read then Agree to the Terms and Conditions.";
 
@@ -81,7 +81,7 @@
 
         }
 
-        if(!validateUsername("login", $userLogin->username) || !verifyPasswordWithSalt($userLogin->password, $dbPassword)){
+        if(!validateUserUsername("login", $userLogin->username) || !verifyUserPasswordWithSalt($userLogin->password, $dbPassword)){
 
             $errors[] = "Invalid Credentials.";
 
@@ -99,13 +99,13 @@
 
         $errors = array();
 
-        if(!validateUsername($userEdit->userId, $userEdit->username)){
+        if(!validateUserUsername($userEdit->userId, $userEdit->username)){
 
             $errors[] = "Invalid or Taken Username (4 - 16 characters).";
 
         }
 
-        if(!validateEmail($userEdit->userId, $userEdit->email)){
+        if(!validateUserEmail($userEdit->userId, $userEdit->email)){
 
             $errors[] = "Invalid or Taken Email.";
 
@@ -119,49 +119,49 @@
 
         $errors = array();
 
-        if(!validateFirstName($userEditProfile->firstName)){
+        if(!validateUserFirstName($userEditProfile->firstName)){
 
             $errors[] = "Invalid First Name (2 - 48 characters).";
 
         }
 
-        if(!validateLastName($userEditProfile->lastName)){
+        if(!validateUserLastName($userEditProfile->lastName)){
 
             $errors[] = "Invalid Last Name (2 - 48 characters).";
 
         }
 
-        if(!validateBirthDate($userEditProfile->birthDate)){
+        if(!validateUserBirthDate($userEditProfile->birthDate)){
 
             $errors[] = "Invalid Birth Date.";
 
         }
 
-        if(!validateAddress($userEditProfile->address)){
+        if(!validateUserAddress($userEditProfile->address)){
 
             $errors[] = "Invalid Home Address (12 - 128 characters).";
 
         }
 
-        if(!validateGender($userEditProfile->gender)){
+        if(!validateUserGender($userEditProfile->gender)){
 
             $errors[] = "Gender must be either 'Male', 'Female', or 'Other'";
 
         }
 
-        if($userEditProfile->phoneNumber !== "0" && !validatePhoneNumber($userEditProfile->userId, $userEditProfile->phoneNumber)){
+        if($userEditProfile->phoneNumber !== "0" && !validateUserPhoneNumber($userEditProfile->userId, $userEditProfile->phoneNumber)){
          
             $errors[] = "Invalid or Taken Phone Number (7-15 digits).";
             
         }
 
-        if(!validateJobTitle($userEditProfile->jobTitle)){
+        if(!validateUserJobTitle($userEditProfile->jobTitle)){
 
             $errors[] = "Invalid Job Title (4 - 64 characters).";
 
         }
 
-        if(!validateJobDescription($userEditProfile->jobDescription)){
+        if(!validateUserJobDescription($userEditProfile->jobDescription)){
 
             $errors[] = "Invalid Job Description (12 - 500 characters).";
 
@@ -177,7 +177,7 @@
 
     }
 
-    function validateUserPassword(UserEditPassword $userEditPassword){
+    function validateUserEditPassword(UserEditPassword $userEditPassword){
 
         $errors = array();
 
@@ -198,7 +198,7 @@
         }
 
         // Check if the old password match from the database password
-        if (!verifyPasswordWithSalt($userEditPassword->oldPassword, $dbPassword)) {
+        if (!verifyUserPasswordWithSalt($userEditPassword->oldPassword, $dbPassword)) {
             
             $errors[] = "Old Password does not match to your current Password.";
         
@@ -240,13 +240,13 @@
         
         }
 
-        $userEditPassword->newPassword = hashPasswordWithSalt($userEditPassword->newPassword);
+        $userEditPassword->newPassword = hashUserPasswordWithSalt($userEditPassword->newPassword);
 
         return $errors;
 
     }
 
-    function sanitizeClass($object){
+    function sanitizeUserClass($object){
     
         if (!is_object($object)) {
 
@@ -289,7 +289,7 @@
         return $object;
     }
 
-    function sanitizeInput($input){
+    function sanitizeUserInput($input){
 
         // Sanitize different types of input based on their data type
         if (is_string($input)) {
@@ -314,7 +314,7 @@
         return $input;
     }
 
-    function hashPasswordWithSalt($password) {
+    function hashUserPasswordWithSalt($password) {
 
         // Generate a random salt
         $salt = bin2hex(random_bytes(16)); // 16 bytes = 128 bits
@@ -328,7 +328,7 @@
         return $salt.":".$hashedPassword;
     }
 
-    function verifyPasswordWithSalt($password, $dbPassword) {
+    function verifyUserPasswordWithSalt($password, $dbPassword) {
 
         if($dbPassword == null){
 
@@ -346,7 +346,7 @@
 
     }
 
-    function validateUsername($userId, $username){
+    function validateUserUsername($userId, $username){
 
         if(!ctype_digit($userId)){
 
@@ -371,20 +371,20 @@
 
     }
 
-    function validateFirstName($firstName){
+    function validateUserFirstName($firstName){
 
         // Name pattern: only allow letters and spaces, 2 to 48 characters long
         return preg_match('/^[a-zA-Z\s]{2,48}$/', $firstName);
     }
 
-    function validateLastName($lastName){
+    function validateUserLastName($lastName){
 
         // Name pattern: only allow letters, 2 to 48 characters long
         return preg_match('/^[a-zA-Z\s]{2,48}$/', $lastName);
 
     }
 
-    function validateEmail($userId, $email){
+    function validateUserEmail($userId, $email){
 
         if(!ctype_digit($userId)){
 
@@ -415,7 +415,7 @@
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
-    function validatePassword($password, $confirmPassword){
+    function validateUserPassword($password, $confirmPassword){
 
         // Check if both fields are not empty
         if (empty($password) || empty($confirmPassword)) {
@@ -458,7 +458,7 @@
         return true;
     }
 
-    function validateBirthDate($birthDate){
+    function validateUserBirthDate($birthDate){
         
         // Birth date pattern: use a basic date format (YYYY-MM-DD)
         if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthDate)) {
@@ -492,7 +492,7 @@
 
     }
 
-    function validateAddress($address){
+    function validateUserAddress($address){
 
         // Check if the address length is between 12 and 128 characters
         $addressLength = strlen($address);
@@ -541,7 +541,7 @@
 
     }
 
-    function validateGender($gender){
+    function validateUserGender($gender){
 
         // List of valid gender options
         $validGenders = array('Male', 'Female', 'Other');
@@ -557,7 +557,7 @@
         return true;
     }
 
-    function validatePhoneNumber($userId, $phoneNumber){
+    function validateUserPhoneNumber($userId, $phoneNumber){
 
         if(!ctype_digit($userId)){
 
@@ -588,7 +588,7 @@
         
     }
 
-    function validateJobTitle($jobTitle){
+    function validateUserJobTitle($jobTitle){
 
         if(empty($jobTitle)){
 
@@ -608,7 +608,7 @@
 
     }
 
-    function validateJobDescription($jobDescription){
+    function validateUserJobDescription($jobDescription){
 
         if(empty($jobDescription)){
 
@@ -652,7 +652,7 @@
 
     }
 
-    function validateAgreedToTerms($agreeTerms) {
+    function validateUserAgreedToTerms($agreeTerms) {
 
         if(empty($agreeTerms)){
 

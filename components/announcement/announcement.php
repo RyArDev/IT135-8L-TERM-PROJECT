@@ -34,7 +34,7 @@
         $announcementCreate->userId = $user['user_id'];
         $announcementCreate->announcementTypeId = isset($_POST['type']) ? $_POST['type'] : 1;
 
-        $announcementCreate = sanitizeClass($announcementCreate);
+        $announcementCreate = sanitizeAnnouncementClass($announcementCreate);
         $announcementErrors = validateAddAnnouncement($announcementCreate);
 
         if (!empty($announcementErrors)){
@@ -72,7 +72,7 @@
         $announcementEdit->announcementTypeId = $announcementCreate->announcementTypeId;
 
         $previousImagePaths = array();
-        $announcementEdit->body = sanitizeInput(moveCkFinderImages($announcementEdit->announcementId, $announcementCreate->body, "Announcement", $previousImagePaths));
+        $announcementEdit->body = sanitizeAnnouncementInput(moveCkFinderImages($announcementEdit->announcementId, $announcementCreate->body, "Announcement", $previousImagePaths));
         cleanUpCkFinderImageDirectory($announcementEdit->announcementId, "Announcement", $previousImagePaths);
 
         updateAnnouncementById($announcementEdit);
@@ -96,7 +96,7 @@
         $announcementEdit->body = isset($_POST['editBody']) ? $_POST['editBody'] : null;
         $announcementEdit->announcementTypeId = isset($_POST['editType']) ? $_POST['editType'] : 1;
 
-        $announcementEdit = sanitizeClass($announcementEdit);
+        $announcementEdit = sanitizeAnnouncementClass($announcementEdit);
         $announcementErrors = validateEditAnnouncement($announcementEdit);
 
         if (!empty($announcementErrors)){
@@ -127,7 +127,7 @@
         }
 
         $previousImagePaths = array();
-        $announcementEdit->body = sanitizeInput(moveCkFinderImages($announcementEdit->announcementId, $announcementEdit->body, "Announcement", $previousImagePaths));
+        $announcementEdit->body = sanitizeAnnouncementInput(moveCkFinderImages($announcementEdit->announcementId, $announcementEdit->body, "Announcement", $previousImagePaths));
         cleanUpCkFinderImageDirectory($announcementEdit->announcementId, "Announcement", $previousImagePaths);
 
         updateAnnouncementById($announcementEdit);

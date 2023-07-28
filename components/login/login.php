@@ -32,7 +32,7 @@
         $userLogin->username = isset($_POST['username']) ? $_POST['username'] : null;
         $userLogin->password = isset($_POST['password']) ? $_POST['password'] : null;
 
-        $userLogin = sanitizeClass($userLogin);
+        $userLogin = sanitizeUserClass($userLogin);
         $userLoginErrors = validateUserLogin($userLogin);
 
         if (!empty($userLoginErrors)) {

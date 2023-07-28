@@ -76,7 +76,7 @@
         $userRegister->gender = isset($_POST['gender']) ? $_POST['gender'] : null;
         $userRegister->agreeTerms = isset($_POST['agreeTerms']) && $_POST['agreeTerms'] == 'on' ? isset($_POST['agreeTerms']) : null;
 
-        $userRegister = sanitizeClass($userRegister);
+        $userRegister = sanitizeUserClass($userRegister);
         $userRegisterErrors = validateUserRegistration($userRegister);
 
         if (!empty($userRegisterErrors)) {

@@ -8,19 +8,19 @@
 
         $errors = array();
 
-        if(!validateTitle($announcementCreate->title)){
+        if(!validateAnnouncementTitle($announcementCreate->title)){
 
             $errors[] = "Invalid Title (4 - 300 characters).";
 
         }  
         
-        if(!validateBody($announcementCreate->body)){
+        if(!validateAnnouncementBody($announcementCreate->body)){
 
             $errors[] = "Invalid Body (12 - 5000 characters).";
 
         }
 
-        if(!validateType($announcementCreate->announcementTypeId)){
+        if(!validateAnnouncementType($announcementCreate->announcementTypeId)){
 
             $errors[] = "Invalid Type (Please Select an Announcement Type).";
 
@@ -34,19 +34,19 @@
 
         $errors = array();
 
-        if(!validateTitle($announcementEdit->title)){
+        if(!validateAnnouncementTitle($announcementEdit->title)){
 
             $errors[] = "Invalid Title (4 - 300 characters).";
 
         }  
         
-        if(!validateBody($announcementEdit->body)){
+        if(!validateAnnouncementBody($announcementEdit->body)){
 
             $errors[] = "Invalid Body (12 - 5000 characters).";
 
         }
 
-        if(!validateType($announcementEdit->announcementTypeId)){
+        if(!validateAnnouncementType($announcementEdit->announcementTypeId)){
 
             $errors[] = "Invalid Type (Please Select an Announcement Type).";
 
@@ -56,7 +56,7 @@
     
     }
 
-    function sanitizeClass($object){
+    function sanitizeAnnouncementClass($object){
     
         if (!is_object($object)) {
 
@@ -99,7 +99,7 @@
         return $object;
     }
 
-    function sanitizeInput($input){
+    function sanitizeAnnouncementInput($input){
 
         // Sanitize different types of input based on their data type
         if (is_string($input)) {
@@ -124,7 +124,7 @@
         return $input;
     }
 
-    function validateTitle($title){
+    function validateAnnouncementTitle($title){
 
         if(empty($title) || strlen($title) < 4 || strlen($title) > 300 ){
 
@@ -137,7 +137,7 @@
         return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $title);
     }
 
-    function validateBody($body){
+    function validateAnnouncementBody($body){
 
         if(empty($body) || strlen($body) < 12 || strlen($body) > 5000 ){
 
@@ -151,7 +151,7 @@
 
     }
 
-    function validateType($type) {
+    function validateAnnouncementType($type) {
         // Convert the input to an integer
         $type = (int)$type;
     

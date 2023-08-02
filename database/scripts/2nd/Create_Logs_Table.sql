@@ -3,7 +3,7 @@ CREATE TABLE logs (
     table_name VARCHAR(64) NOT NULL,
     description VARCHAR(5000) NOT NULL,
     date_created DATETIME NOT NULL,
-    user_id INT(11) UNSIGNED NOT NULL
+    user_id INT(11) UNSIGNED NULL
 );
 
 ALTER TABLE logs

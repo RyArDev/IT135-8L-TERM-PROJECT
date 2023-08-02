@@ -8,12 +8,7 @@
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
     $_SESSION['current_page'] = "register";
-
-    if(isset($user['user_id'])){
-
-        header("Location: profile");
-        
-    }
+    redirectToProfileIfLoggedIn();
 
     include_once('entities/user/user-model.php');
     include_once('entities/user/user-controller.php');
@@ -23,7 +18,7 @@
     //Import Alert
     include_once('components/alert/alert.php');
     
-    function userRegister(){
+    function userRegister(&$logDescription){
 
         $message = "";
         $type = "";
@@ -79,6 +74,15 @@
         $userRegister = sanitizeUserClass($userRegister);
         $userRegisterErrors = validateUserRegistration($userRegister);
 
+        $registerLog = new LogUserRegister();
+        $registerLog->username = $userRegister->username;
+        $registerLog->email = $userRegister->email;
+        $registerLog->time = new DateTime();
+        $registerLog->status = 'register pending';
+        $registerLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $registerLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $registerLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
         if (!empty($userRegisterErrors)) {
 
             $message .= "<b>User Registration Error</b><br>";
@@ -91,6 +95,8 @@
 
             $type = 'error';
             showAlert($message, $type);
+            $registerLog->status = 'register failed';
+            $logDescription = createLogUserRegister($registerLog);
             return;
 
         }
@@ -99,9 +105,11 @@
 
         if (!$registerUserSuccess) {
 
-            $message = 'User Registered Unsuccessfully!';
+            $message = 'User Registered Unsuccessfully, please try again.';
             $type = 'error';
             showAlert($message, $type);
+            $registerLog->status = 'register failed';
+            $logDescription = createLogUserRegister($registerLog);
             return;
 
         }
@@ -113,6 +121,8 @@
         $_SESSION['alert_message'] = $message;
         $_SESSION['alert_type'] = $type;
 
+        $registerLog->status = 'register success';
+        $logDescription = createLogUserRegister($registerLog);
         header("Location: login");
 
     }
@@ -120,7 +130,13 @@
     //Form Submission for Registration
     if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-        userRegister();
+        $logCreate = new LogCreate();
+        $logCreate->tableName = 'users';
+        $logCreate->dateCreated = new DateTime();
+        $logCreate->userId = null;
+        
+        userRegister($logCreate->description);
+        createLog($logCreate);
 
     }
 ?>

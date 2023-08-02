@@ -2,7 +2,7 @@
 
     function getConfigFile(){
 
-        $settings = json_decode(file_get_contents('settings.json'), true);
+        $settings = json_decode(file_get_contents(dirname(dirname(__DIR__)).'/settings.json'), true);
     
         if($settings['STAGE'] == "Production"){
             

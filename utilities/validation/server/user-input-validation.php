@@ -177,9 +177,10 @@
 
     }
 
-    function validateUserEditPassword(UserEditPassword $userEditPassword){
+    function validateUserEditPassword(UserEditPassword $userEditPassword, $role){
 
         $errors = array();
+        $role = strtolower($role);
 
         // Check if any field is empty
         if (empty($userEditPassword->oldPassword) || empty($userEditPassword->newPassword) || empty($userEditPassword->confirmNewPassword)) {
@@ -191,14 +192,14 @@
         //Query the result from the database to get the hashed password
         $dbPassword = null;
 
-        if(isset(getUserPasswordById($userEditPassword->userId)['password'])){
+        if(isset(getUserPasswordById($userEditPassword->userId)['password']) && $role !== 'admin'){
 
             $dbPassword = getUserPasswordById($userEditPassword->userId)['password'];
 
         }
 
         // Check if the old password match from the database password
-        if (!verifyUserPasswordWithSalt($userEditPassword->oldPassword, $dbPassword)) {
+        if (!verifyUserPasswordWithSalt($userEditPassword->oldPassword, $dbPassword) && $role !== 'admin') {
             
             $errors[] = "Old Password does not match to your current Password.";
         

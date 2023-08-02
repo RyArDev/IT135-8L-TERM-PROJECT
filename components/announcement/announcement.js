@@ -1,12 +1,9 @@
 function toggleForm(formId) {
 
-    var form = document.getElementById(formId);
+    let form = document.getElementById(formId);
+    let otherForms = document.getElementsByClassName("hidden-form");
 
-    var otherForms = document.getElementsByClassName("hidden-form");
-
-    //console.log(isListenerAttached(document.getElementById("profileImage"), "change", onChangeListener));
-
-    for (var i = 0; i < otherForms.length; i++) {
+    for (let i = 0; i < otherForms.length; i++) {
 
         if (otherForms[i] !== form) {
 
@@ -20,33 +17,39 @@ function toggleForm(formId) {
 
 }
 
-function initEditAnnouncement() {
-    
-    document.addEventListener("DOMContentLoaded", function() {
-        
-        const editAnnouncementButtons = document.querySelectorAll(".editAnnouncementButton");
+function getEditAnnouncementButtons(){
 
-        editAnnouncementButtons.forEach(button => {
+    const editAnnouncementButtons = document.querySelectorAll(".editAnnouncementButton");
 
-            button.addEventListener("click", function() {
+    editAnnouncementButtons.forEach(button => {
 
-                document.getElementById("editId").value = this.getAttribute("data-id");
-                document.getElementById("editTitle").value = this.getAttribute("data-title");
-                document.getElementById("editType").value = this.getAttribute("data-type");
-                
-                const editBodyEditor = ckEditorInstances['editBody'];
+        button.addEventListener("click", function() {
 
-                console.log(this.getAttribute("data-body"));
-                
-                if (editBodyEditor) {
+            document.getElementById("editId").value = this.getAttribute("data-id");
+            document.getElementById("editTitle").value = this.getAttribute("data-title");
+            document.getElementById("editType").value = this.getAttribute("data-type");
+            
+            const editBodyEditor = ckEditorInstances['editBody'];
 
-                    editBodyEditor.setData(this.getAttribute("data-body"));
+            console.log(this.getAttribute("data-body"));
+            
+            if (editBodyEditor) {
 
-                }
+                editBodyEditor.setData(this.getAttribute("data-body"));
 
-            });
+            }
 
         });
+
+    });
+    
+}
+
+function initEditAnnouncement() {
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        getEditAnnouncementButtons();
 
     });
 

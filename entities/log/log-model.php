@@ -1,20 +1,64 @@
 <?php
 
+    class Log{
+
+        public $logId;
+        public $tableName;
+        public $description;
+        public $dateCreated;
+        public $userId;
+
+    }
+
+    class LogCreate{
+        
+        public $tableName;
+        public $description;
+        public $dateCreated;
+        public $userId;
+
+    }
+
+    class LogEdit{
+
+        public $logId;
+        public $tableName;
+        public $description;
+
+    }
+
     class LogUserLogin{
+
+        public $userId;
+        public $username;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogUserLogout{
 
         public $userId;
         public $time;
         public $status;
-        public $ipAddress;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
         public $userAgent;
 
-        /*
-            $logUserId = $_SESSION['user_id'];
-            $logLoginTime = date('Y-m-d H:i:s');
-            $logLoginStatus = 'success';
-            $logIPAddress = $_SERVER['REMOTE_ADDR'];
-            $logUserAgent = $_SERVER['HTTP_USER_AGENT'];
-        */
+    }
+
+    class LogUserRefreshToken{
+
+        public $refreshToken;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
 
     }
 
@@ -24,17 +68,56 @@
         public $email;
         public $time;
         public $status;
-        public $ipAddress;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
         public $userAgent;
 
-        /*
-            $logUsername = $_POST['username'];
-            $logEmail = $_POST['email'];
-            $logRegistrationTime = date('Y-m-d H:i:s');
-            $logRegistrationStatus = 'success';
-            $logIPAddress = $_SERVER['REMOTE_ADDR'];
-            $logUserAgent = $_SERVER['HTTP_USER_AGENT'];
-        */
+    }
+
+    class LogUserEdit{
+
+        public $userId;
+        public $userProfileId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogAnnouncementCreate{
+
+        public $title;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogAnnouncementEdit{
+
+        public $announcementId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogAnnouncementDelete{
+
+        public $announcementId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
 
     }
 

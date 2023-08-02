@@ -34,7 +34,7 @@
     //Import Alert
     include_once('components/alert/alert.php');
 
-    function updateUserAndProfile($user, $userProfile){
+    function updateUserAndProfile($user, $userProfile, &$logDescription, &$logUserId){
 
         $message = "";
         $type = "";
@@ -108,6 +108,16 @@
             $userErrors = validateUser($userEdit);
             $userProfileErrors = validateUserProfile($userProfileEdit);
 
+            $userEditLog = new LogUserEdit();
+            $userEditLog->userId = $userProfileEdit->userId;
+            $logUserId = $userProfileEdit->userId;
+            $userEditLog->userProfileId = $userProfileEdit->userProfileId;
+            $userEditLog->time = new DateTime();
+            $userEditLog->status = 'user edit pending';
+            $userEditLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+            $userEditLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+            $userEditLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
             if (!empty($userErrors) || !empty($userProfileErrors)) {
                 
                 $message .= "<b>User Profile Error</b><br>";
@@ -126,6 +136,8 @@
 
                 $type = 'error';
                 showAlert($message, $type);
+                $userEditLog->status = 'user edit failed';
+                $logDescription = createLogUserEdit($userEditLog);
                 return;
 
             }
@@ -154,6 +166,8 @@
 
                     $type = 'error';
                     showAlert($message, $type);
+                    $userEditLog->status = 'user edit profile image failed';
+                    $logDescription = createLogUserEdit($userEditLog);
                     return;
 
                 }
@@ -186,6 +200,8 @@
 
                     $type = 'error';
                     showAlert($message, $type);
+                    $userEditLog->status = 'user edit profile banner failed';
+                    $logDescription = createLogUserEdit($userEditLog);
                     return;
 
                 }
@@ -207,12 +223,16 @@
                 $message = 'User Profile Updated Unsuccessfully!';
                 $type = 'error';
                 showAlert($message, $type);
+                $userEditLog->status = 'user edit update failed';
+                $logDescription = createLogUserEdit($userEditLog);
                 return;
 
             }
 
             $message = 'User Profile Updated Successfully!';
             $type = 'success';
+            $userEditLog->status = 'user edit success';
+            $logDescription = createLogUserEdit($userEditLog);
 
             showAlert($message, $type);
 
@@ -227,7 +247,16 @@
             $userEditPassword->confirmNewPassword = isset($_POST['confirmNewPassword']) ? $_POST['confirmNewPassword'] : null;
             
             $userEditPassword = sanitizeUserClass($userEditPassword);
-            $userPasswordErrors = validateUserEditPassword($userEditPassword);
+            $userPasswordErrors = validateUserEditPassword($userEditPassword, 'user');
+
+            $userEditLog = new LogUserEdit();
+            $userEditLog->userId = $userEditPassword->userId;
+            $userEditLog->userProfileId = $userEditPassword->userId;
+            $userEditLog->time = new DateTime();
+            $userEditLog->status = 'user edit pending';
+            $userEditLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+            $userEditLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+            $userEditLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
 
             if (!empty($userPasswordErrors)) {
                 
@@ -241,6 +270,8 @@
 
                 $type = 'error';
                 showAlert($message, $type);
+                $userEditLog->status = 'user edit password failed';
+                $logDescription = createLogUserEdit($userEditLog);
                 return;
 
             }
@@ -252,12 +283,16 @@
                 $message = 'User Password Updated Unsuccessfully!';
                 $type = 'error';
                 showAlert($message, $type);
+                $userEditLog->status = 'user edit password update failed';
+                $logDescription = createLogUserEdit($userEditLog);
                 return;
 
             }
 
             $message = 'User Password Updated Successfully!';
             $type = 'success';
+            $userEditLog->status = 'user edit password success';
+            $logDescription = createLogUserEdit($userEditLog);
             
             showAlert($message, $type);
 
@@ -280,8 +315,14 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        
+        $logCreate = new LogCreate();
+        $logCreate->tableName = 'users';
+        $logCreate->dateCreated = new DateTime();
+        $logCreate->userId = null;
 
-        updateUserAndProfile($user, $userProfile);
+        updateUserAndProfile($user, $userProfile, $logCreate->description, $logCreate->userId);
+        createLog($logCreate);
 
         $user = checkUserLogin();
         $userProfile = checkUserProfile();
@@ -367,7 +408,6 @@
     <button onclick="toggleForm('changePasswordForm')">Close</button>
     <h2>Change Password</h2>
     <form method="POST">
-
         <label for="oldPassword">Old Password:</label>
         <input type="password" id="oldPassword" name="oldPassword" placeholder="Old Password" required><br><br>
 

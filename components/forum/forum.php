@@ -11,6 +11,15 @@
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
     $_SESSION['current_page'] = "forum";
+
+    include_once('entities/forum/forum-controller.php');
+    include_once('entities/forum/forum-model.php');
+    include_once('utilities/validation/server/forum-input-validation.php');
+
+    include_once('entities/file/file-controller.php');
+    include_once('entities/file/file-model.php');
+    include_once('utilities/validation/server/file-input-validation.php');
+
 ?>
 
 <div>

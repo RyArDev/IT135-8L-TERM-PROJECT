@@ -36,6 +36,7 @@
 
         public $username;
         public $password;
+        public $refreshToken;
 
     }
 

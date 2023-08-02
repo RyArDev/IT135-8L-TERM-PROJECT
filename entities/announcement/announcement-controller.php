@@ -3,6 +3,7 @@
     require_once(dirname(dirname(__DIR__)).'/utilities/database/db-controller.php');
     require_once(dirname(dirname(__DIR__)).'/entities/announcement/announcement-model.php');
     require_once(dirname(dirname(__DIR__)).'/utilities/error/controller-error-handler.php');
+    require_once(dirname(dirname(__DIR__)).'/plugins/jwt-token.php');
 
     function getAllAnnouncements(){
 
@@ -25,6 +26,33 @@
         } catch (Exception $e) {
             
             echo "Getting All Announcements Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function getAnnouncementBySearchCriteria($searchValue){
+
+        try {
+
+            //Queries the results
+            $params = [$searchValue];
+
+            //Queries the results
+            $results = executeStoredProcedure("WebApp_Announcements_GetBySearchCriteria", $params)[0];
+
+            if (empty($results)) {
+
+                return null;
+
+            }
+
+            return $results;
+
+        } catch (Exception $e) {
+            
+            echo "Getting Searched Announcements Failed: " . $e->getMessage();
             return;
 
         }
@@ -175,5 +203,60 @@
         }
 
     }
+
+    //------------------------------------------------AJAX------------------------------------------------//
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+
+        session_start();
+
+        switch ($_POST['action']) {
+    
+            default:{
+
+                header("HTTP/1.1 404 Not Found");
+                break;
+
+            }
+
+        }
+
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+
+        session_start();
+
+        switch ($_GET['action']) {
+
+            case 'getAnnouncementsBySearch':{
+
+                if(!validateJWTToken('admin')){
+
+                    http_response_code(401);
+
+                }else{
+
+                    $searchValue = $_GET['searchValue'];
+                    $searchedAnnouncements = getAnnouncementBySearchCriteria($searchValue);
+                    header('Content-Type: application/json');
+                    echo json_encode(['searchedAnnouncements' => $searchedAnnouncements]);
+
+                }
+
+                break;
+
+            }
+    
+            default:{
+
+                header("HTTP/1.1 404 Not Found");
+                break;
+
+            }
+
+        }
+    }
+
 
 ?>

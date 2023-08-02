@@ -6,13 +6,12 @@ const isListenerAttached = (element, eventType, listener) => {
 
 function toggleForm(formId) {
 
-    var form = document.getElementById(formId);
-
-    var otherForms = document.getElementsByClassName("hidden-form");
+    let form = document.getElementById(formId);
+    let otherForms = document.getElementsByClassName("hidden-form");
 
     //console.log(isListenerAttached(document.getElementById("profileImage"), "change", onChangeListener));
 
-    for (var i = 0; i < otherForms.length; i++) {
+    for (let i = 0; i < otherForms.length; i++) {
 
         if (otherForms[i] !== form) {
 

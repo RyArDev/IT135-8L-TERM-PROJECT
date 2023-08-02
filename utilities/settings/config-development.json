@@ -74,5 +74,8 @@
             "Key": "AIzaSyA_B7gr8lVszLOD096YGtBFiac7a7LhmiU",
             "Url": "https://www.googleapis.com/youtube/v3/videos"
         }
+    },
+    "SECRET_KEYS":{
+        "Jwt":"-=Temp_Secret_Key=-"
     }
 }

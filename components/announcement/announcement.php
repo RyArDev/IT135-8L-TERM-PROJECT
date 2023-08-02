@@ -22,7 +22,7 @@
 
     $announcements = getAllAnnouncements();
 
-    function addAnnouncement($user){
+    function addAnnouncement($user, &$logDescription, &$logUserId){
 
         $message = "";
         $type = "";
@@ -37,6 +37,15 @@
         $announcementCreate = sanitizeAnnouncementClass($announcementCreate);
         $announcementErrors = validateAddAnnouncement($announcementCreate);
 
+        $announcementCreateLog = new LogAnnouncementCreate();
+        $announcementCreateLog->title = $announcementCreate->title;
+        $announcementCreateLog->time = new DateTime();
+        $announcementCreateLog->status = 'announcement creation pending';
+        $announcementCreateLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $announcementCreateLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $announcementCreateLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $logUserId = $announcementCreate->userId;
+
         if (!empty($announcementErrors)){
 
             $message .= "Announcement Creation Error:<br>";
@@ -49,6 +58,8 @@
 
                 $type = 'error';
                 showAlert($message, $type);
+                $announcementCreateLog->status = 'announcement creation failed';
+                $logDescription = createLogAnnouncementCreate($announcementCreateLog);
                 return;
 
         }
@@ -60,6 +71,8 @@
             $message = 'Announcement Created Unsuccessfully!';
             $type = 'error';
             showAlert($message, $type);
+            $announcementCreateLog->status = 'announcement creation failed';
+            $logDescription = createLogAnnouncementCreate($announcementCreateLog);
             return;
 
         }
@@ -79,12 +92,14 @@
 
         $message = 'Announcement Created Successfully!';
         $type = 'success';
+        $announcementCreateLog->status = 'announcement creation success';
+        $logDescription = createLogAnnouncementCreate($announcementCreateLog);
 
         showAlert($message, $type);
 
     }
 
-    function editAnnouncement(){
+    function editAnnouncement($user, &$logDescription, &$logUserId){
 
         $message = "";
         $type = "";
@@ -99,6 +114,16 @@
         $announcementEdit = sanitizeAnnouncementClass($announcementEdit);
         $announcementErrors = validateEditAnnouncement($announcementEdit);
 
+        $announcementEditLog = new LogAnnouncementEdit();
+        $announcementEditLog->announcementId = $announcementEdit->announcementId;
+        $announcementEditLog->userId = $user['user_id'];
+        $logUserId = $user['user_id'];
+        $announcementEditLog->time = new DateTime();
+        $announcementEditLog->status = 'announcement edit pending';
+        $announcementEditLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $announcementEditLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $announcementEditLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
         if (!empty($announcementErrors)){
 
             $message .= "Announcement Edit Error:<br>";
@@ -111,6 +136,8 @@
 
                 $type = 'error';
                 showAlert($message, $type);
+                $announcementEditLog->status = 'announcement edit failed';
+                $logDescription = createLogAnnouncementEdit($announcementEditLog);
                 return;
 
         }
@@ -122,6 +149,8 @@
             $message = 'Announcement Edited Unsuccessfully!';
             $type = 'error';
             showAlert($message, $type);
+            $announcementEditLog->status = 'announcement edit failed';
+            $logDescription = createLogAnnouncementEdit($announcementEditLog);
             return;
 
         }
@@ -134,12 +163,14 @@
 
         $message = 'Announcement Edited Successfully!';
         $type = 'success';
+        $announcementEditLog->status = 'announcement edit success';
+        $logDescription = createLogAnnouncementEdit($announcementEditLog);
 
         showAlert($message, $type);
 
     }
 
-    function deleteAnnouncement(){
+    function deleteAnnouncement($user, &$logDescription, &$logUserId){
 
         $message = "";
         $type = "";
@@ -150,44 +181,63 @@
 
         $announcementDeleteSuccess = deleteAnnouncementById($_POST['announcementId']);
 
+        $announcementDeleteLog = new LogAnnouncementDelete();
+        $announcementDeleteLog->announcementId = $_POST['announcementId'];
+        $announcementDeleteLog->userId = $user['user_id'];
+        $logUserId = $user['user_id'];
+        $announcementDeleteLog->time = new DateTime();
+        $announcementDeleteLog->status = 'announcement deletion pending';
+        $announcementDeleteLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $announcementDeleteLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $announcementDeleteLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
         if (!$announcementDeleteSuccess) {
 
             $message = 'Announcement Deleted Unsuccessfully!';
             $type = 'error';
             showAlert($message, $type);
+            $announcementDeleteLog->status = 'announcement deletion failed';
+            $logDescription = createLogAnnouncementDelete($announcementDeleteLog);
             return;
 
         }
 
         $message = 'Announcement Deleted Successfully!';
         $type = 'success';
+        $announcementDeleteLog->status = 'announcement deletion success';
+        $logDescription = createLogAnnouncementDelete($announcementDeleteLog);
 
         showAlert($message, $type);
 
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+        
+        $logCreate = new LogCreate();
+        $logCreate->tableName = 'announcements';
+        $logCreate->dateCreated = new DateTime();
+        $logCreate->userId = null;
+        
         if (isset($_POST["addAnnouncementForm"])) {
 
-            addAnnouncement($user);
-            $announcements = getAllAnnouncements();
+            addAnnouncement($user, $logCreate->description, $logCreate->userId);
 
         }
 
         if (isset($_POST["editAnnouncementForm"])) {
 
-            editAnnouncement();
-            $announcements = getAllAnnouncements();
+            editAnnouncement($user, $logCreate->description, $logCreate->userId);
 
         }
 
         if (isset($_POST["deleteAnnouncementForm"])) {
 
-            deleteAnnouncement();
-            $announcements = getAllAnnouncements();
+            deleteAnnouncement($user, $logCreate->description, $logCreate->userId);
 
         }
+
+        createLog($logCreate);
+        $announcements = getAllAnnouncements();
         
     }
 

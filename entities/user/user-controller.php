@@ -3,6 +3,7 @@
     require_once(dirname(dirname(__DIR__)).'/utilities/database/db-controller.php');
     require_once(dirname(dirname(__DIR__)).'/entities/user/user-model.php');
     require_once(dirname(dirname(__DIR__)).'/utilities/error/controller-error-handler.php');
+    require_once(dirname(dirname(__DIR__)).'/plugins/jwt-token.php');
 
     function getAllUsers(){
 
@@ -117,7 +118,7 @@
         try {
 
             //Queries the results
-            $params = [$user->username, $user->password];
+            $params = [$user->username, $user->password, $user->refreshToken];
 
             //Queries the results
             $result = executeStoredProcedure("WebApp_Users_Login", $params)[0];
@@ -133,6 +134,33 @@
         } catch (Exception $e) {
             
             echo "Getting User By Id Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function getUsersBySearchCriteria($searchValue){
+
+        try {
+
+            //Queries the results
+            $params = [$searchValue];
+
+            //Queries the results
+            $results = executeStoredProcedure("WebApp_Users_GetBySearchCriteria", $params)[0];
+
+            if (empty($results)) {
+
+                return null;
+
+            }
+
+            return $results;
+
+        } catch (Exception $e) {
+            
+            echo "Getting Searched Users Failed: " . $e->getMessage();
             return;
 
         }
@@ -210,7 +238,7 @@
                 null,
                 "Not Available",
                 "Not Available",
-                "Test123",
+                "No Initial Login",
                 new DateTime(),
                 "default-profile-image",
                 "assets/images/users/default-profile-image.webp",
@@ -240,12 +268,12 @@
 
     }
 
-    function updateUserStatusById($user_id, $status){
+    function updateUserStatusById($userId, $status){
 
         try {
 
             //Queries the results
-            $params = [$user_id, $status];
+            $params = [$userId, $status];
 
             //Queries the results
             $result = executeStoredProcedure("WebApp_Users_UpdateStatusById", $params);
@@ -261,6 +289,33 @@
         } catch (Exception $e) {
             
             echo "Updating User Status By Id Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function updateUserStatusByRefreshToken($refreshToken, $status){
+
+        try {
+
+            //Queries the results
+            $params = [$refreshToken, $status];
+
+            //Queries the results
+            $result = executeStoredProcedure("WebApp_Users_UpdateStatusByRefreshToken", $params);
+
+            if (!$result) {
+
+                return false;
+
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            
+            echo "Updating User Status By Refresh Token Failed: " . $e->getMessage();
             return;
 
         }
@@ -450,5 +505,136 @@
 
     }
 
+    function verifyUserRefreshToken($refreshToken){
+
+        try {
+
+            //Queries the results
+            $params = [$refreshToken];
+
+            //Queries the results
+            $result = executeStoredProcedure("WebApp_Users_GetIdByRefreshToken", $params)[0];
+
+            if (empty($result)) {
+
+                return null;
+
+            }
+
+            return $result[0];
+
+        } catch (Exception $e) {
+            
+            echo "Verifying User Refresh Token Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function generateUserRefreshToken() {
+        
+        return base64_encode(random_bytes(24));
+
+    }
+
+    //------------------------------------------------AJAX------------------------------------------------//
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+
+        session_start();
+
+        switch ($_POST['action']) {
+
+            case 'checkUserActivity':{
+
+                if (!isset($_SESSION['user_id'])) {
+
+                    http_response_code(400);
+
+                } else {
+
+                    updateUserStatusById($_SESSION['user_id'], 1);
+                    http_response_code(200);
+
+                }
+
+                break;
+            }
+
+            case 'setUserInactive':{
+
+                updateUserStatusByRefreshToken($_COOKIE['refresh_token'], 0);
+                http_response_code(200);
+                break;
+
+            }
+    
+            default:{
+
+                header("HTTP/1.1 404 Not Found");
+                http_response_code(404);
+                break;
+
+            }
+
+        }
+
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+
+        session_start();
+
+        switch ($_GET['action']) {
+
+            case 'getActiveUsers':{
+
+                if(!validateJWTToken('admin')){
+
+                    http_response_code(401);
+
+                }else{
+
+                    $activeUsers = getAllActiveUsers();
+                    header('Content-Type: application/json');
+                    echo json_encode(['activeUsers' => $activeUsers]);
+
+                }
+
+                break;
+
+            }
+
+            case 'getUsersBySearch':{
+
+                if(!validateJWTToken('admin')){
+
+                    http_response_code(401);
+
+                }else{
+
+                    $searchValue = $_GET['searchValue'];
+                    $searchedUser = getUsersBySearchCriteria($searchValue);
+                    header('Content-Type: application/json');
+                    echo json_encode(['searchedUser' => $searchedUser]);
+
+                }
+
+                break;
+
+            }
+    
+            default:{
+
+                header("HTTP/1.1 404 Not Found");
+                http_response_code(404);
+                break;
+
+            }
+
+        }
+        
+    }
 
 ?>

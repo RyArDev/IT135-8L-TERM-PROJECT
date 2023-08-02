@@ -2,7 +2,7 @@
     "DATABASE":{
         "Type": "mysql",
         "Host": "localhost",
-        "Port": 3307,
+        "Port": 3306,
         "User": "root",
         "Password": "",
         "Name": "barangay_sta_cruz"

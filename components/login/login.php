@@ -113,22 +113,24 @@
 
         userLogin($logCreate->description, $logCreate->userId);
         createLog($logCreate);
-
     }
-
 ?>
 
-<div>
-    <h2>Login</h2>
-    <form method="POST">
+<div class="log-content">
+<br>
+<div class="login">
+    <h2 class="logtext">Login</h2>
+    <form method="POST" class="log-info">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-        <br>
+        <br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Login">
+        <br><br>
+        <input type="submit" class="log-button" value="Login">
     </form>
+</div>
+<br>
 </div>
 
 <?php 

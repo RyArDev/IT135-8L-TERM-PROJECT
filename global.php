@@ -2,6 +2,8 @@
     //Checks if the user is logged in before.
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
+    $userProfile = checkUserProfile();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,33 +21,45 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/admin">Admin Dashboard</a></li>
-                    <li><a href="/announcement">Announcement</a></li>
-                    <li><a href="/barangay">Barangay</a></li>
-                    <li><a href="/contact-us">Contact Us</a></li>
-                    <li><a href="/forum">Forum</a></li>
-                    <li><a href="/history">History</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <?php
-                        if(isset($_SESSION['user_id'])){
 
-                            echo "<li><a href='/profile'>" . $user['username'] . "</a></li>" .
-                            "<li><a href='utilities/authentication/logout.php'>Logout</a></li>";
+    <div class="header">
+    <div class="navigation-bar">
+      <div class="logo">
+        <a href="#">
+          <img src="./assets/logo.jpg" alt="Logo">
+        </a>      <div class="circle"></div>
+        <span class="logo-text">STA. CRUZ MAKATI</span>
+      </div>
+  
+      <div class="navigation-links">
+        <a href="home">Home</a>
+        <a href="services">Services</a>
+        <a href="announcement">Announcements</a>
+        <a href="history">History</a>
+        <a href="forums">Forum</a>
+        <a href="contact-us">Contact Us</a>
+      </div>
 
-                        }else{
+      <?php
+    if(isset($_SESSION['user_id'])){
 
-                            echo "<li><a href='/login'>Login</a></li>" . 
-                            "<li><a href='/register'>Register</a></li>";
+        echo 
+        "<a href='/profile'>" . $user['username'] .
+            "<img src='". $userProfile['profile_image_url'] . "'alt='User Avatar' class='avatar-icon' width='10%' align='right'/>
+        </a>";
 
-                        }
-                    ?>
-                </ul>
-            </nav>
-        </header>
+    }else{
+
+        echo "<a href='/login'>Login</a><a href='/register'>Register</a>";
+
+    }
+?>
+    </div>
+  </div>
+
+
+  </div>
+</div>
 
         <div class="page-content">
             <?php 
@@ -61,9 +75,47 @@
             ?>
         </div>
 
-        <footer>
-
-        </footer>
+        <div class="footer">
+    <div class="footer-left">
+      <p><br>STA. CRUZ MAKATI</p>
+    <div class="contact">
+      <p>XXXXXXXXXXX</p>
+      <p>XXXXXXXXXXX</p>
+      <p>XXXXXXXXXXX</p>
+      </div>
+    </div>
+    <div class="footer-center">
+      <div class="socials-container">
+        <p class="socials"><br><br>Social Links</p>
+        <div class="icons">
+          <a href="https://www.facebook.com/stacruzmakatiofficials" target="facebook">
+            <img src="./assets/images/pages/homepage/facebook.png" class="icon">
+          </a>
+          <a href="https://www.makati.gov.ph/" target="website">
+            <img src="./assets/images/pages/homepage/globe.png" class="icon">
+          </a>
+          <a href="#" target="email">
+            <img src="./assets/images/pages/homepage/email.png" class="icon">
+          </a>
+          <a href="https://www.youtube.com/@barangaysantacruzmakati1530" target="youtube">
+            <img src="./assets/images/pages/homepage/youtube.png" class="icon">
+          </a>
+        </div>
+        <p class="all-rights">© All Rights Reserved 2023</p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <p>Quick Links</p>
+    <div class="links">
+      <a href="https://www.makati.gov.ph/">Makati Web Portal </a><br>
+      <a href="#">Barangay Services </a><br>
+      <a href="#">Hotlines </a><br>
+    </div>
+    </div>    
+    </div>
+    </div>
+  </div>
+  
     </body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.min.js" integrity="sha512-/F8YhC3n5OrM9ta9htMD620kH0paKnjDHCHcSvyWumxlqsnkS/XCpYExuMZuXE4K3GE9tDQFBqgXsmkjsjRbDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

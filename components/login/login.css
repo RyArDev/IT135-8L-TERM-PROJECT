@@ -1,0 +1,33 @@
+.log-content{
+    background-color: navy;
+}
+
+.login{
+    margin:auto;
+    background-color: aliceblue;
+    width:500px;
+    height:300px;
+    border: solid 5px black;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.logtext{
+    text-align: center;
+}
+
+.log-info{
+    text-align: center;
+    padding: 5%;
+}
+
+.log-button{
+    color:black;
+    background-color:rgb(255, 255, 255) ;
+    border: solid 2px black;
+    border-radius: 5px;
+}
+
+.log-button hover{
+    color: blue;
+}

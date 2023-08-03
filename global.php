@@ -18,6 +18,7 @@
         <title>Your Website Title</title>
         <link rel="icon" href="favicon.ico" type="image/ico">
         <link rel="stylesheet" type="text/css" href="global.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
@@ -50,7 +51,8 @@
 
     }else{
 
-        echo "<a href='/login'>Login</a><a href='/register'>Register</a>";
+        echo "<a href='/login' role='button' data-toggle='modal' data-target='#loginModal'>Login</a>
+              <a href='/register' role='button' data-toggle='modal' data-target='#registerModal'>Register</a>";
 
     }
 ?>

@@ -47,7 +47,7 @@
             createLog($logCreate);
 
             session_destroy();
-            header("Location: /");
+            header("Location: /login");
     
         } catch (Exception $e) {
             

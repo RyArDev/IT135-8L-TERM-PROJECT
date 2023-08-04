@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html> 
 <body>
     <div class="contact-section" align="center">
         <h1 class="contact-emergency">CONTACT INFORMATION</h1>
@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h1 class="contact-information-header">CONTACT INFORMATION</h1>
         </div>
 
+        <div class="contact-rectangle">
         <form method="POST" action="">
             <div class="contact-section" align="center">
                 <div class="left-section">
@@ -130,20 +131,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <input type="tel" name="phone" placeholder="+63-xxx-xxx-xxxx">
                     </div>
 
-                    <div class="info">
-                        <h3>Subject<span class="required-asterisk">*</span></h3>
-                        <input type="text" name="subject" placeholder="Subject" required>
-                    </div>
-
-                    <div class="info">
-                        <h3>Priority</h3>
-                        <select name="priority_id">
-                            <option value="1">Low</option>
-                            <option value="2">Medium</option>
-                            <option value="3">High</option>
-                            <option value="4">Urgent</option>
-                        </select>
-                    </div>
 
                     <div class="info">
                         <h3>Message</h3>
@@ -151,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
                     <button type="submit">Submit</button>
+                </div>
                 </div>
 
                 <div style="clear: both;"></div>

@@ -141,55 +141,104 @@
     }
 ?>
 
-<div>
-    <h2>Registration Form</h2>
+<div class="regs-content">
+    <div class="registration">
+    <h2 class="regtext" align="center">Registration Form</h2>
+    <br>
     <form method="POST">
+        <div class="user">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : null; ?>" required><br><br>
-        
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" placeholder="First Name" value="<?php echo isset($_POST['firstName']) ? $_POST['firstName'] : null; ?>" required><br><br>
-        
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" placeholder="Last Name" value="<?php echo isset($_POST['lastName']) ? $_POST['lastName'] : null; ?>" required><br><br>
-        
+        <div class="usertext">
+        <input type="text" id="username" name="username" placeholder="BruceWayne" value="<?php echo isset($_POST['username']) ? $_POST['username'] : null; ?>" required><br><br>
+        </div>  
+        </div>
+
+        <div class="email">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : null; ?>" required><br><br>
-        
+        <div class="emailtext">
+        <input type="email" id="email" name="email" placeholder="Ilovegeldof@gmail.com" value="<?php echo isset($_POST['email']) ? $_POST['email'] : null; ?>" required><br><br>
+        </div>
+        </div>
+
+        <div class="first">
+        <label for="firstName">First Name:</label>
+        <div class="firsttext">
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" value="<?php echo isset($_POST['firstName']) ? $_POST['firstName'] : null; ?>" required><br><br>
+        </div>    
+        </div>
+
+        <div class="last">
+        <label for="lastName">Last Name:</label>
+        <div class="lasttext">
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" value="<?php echo isset($_POST['lastName']) ? $_POST['lastName'] : null; ?>" required><br><br>
+        </div>
+        </div>
+
+        <div class="birth">
         <label for="birthDate">Birth Date:</label>
+        <div class="datetext">
         <input type="date" id="birthDate" name="birthDate" placeholder="Birth Date" value="<?php echo isset($_POST['birthDate']) ? $_POST['birthDate'] : null; ?>" required><br><br>
-        
+        </div>
+        </div>
+
+        <div class="add">
         <label for="address1">Address:</label>
+        <div class="addtext">
         <input type="text" id="address1" name="address1" placeholder="Address Line 1" value="<?php echo isset($_POST['address1']) ? $_POST['address1'] : null; ?>" required><br>
         <input type="text" id="address2" name="address2" placeholder="Address Line 2" value="<?php echo isset($_POST['address2']) ? $_POST['address2'] : null; ?>"><br><br>
-        
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="City" value="<?php echo isset($_POST['city']) ? $_POST['city'] : null; ?>" required><br><br>
-        
-        <label for="state">State/Province:</label>
-        <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($_POST['stateProvince']) ? $_POST['stateProvince'] : null; ?>" required><br><br>
+        </div>
+        </div>
 
-        <label for="zipCode">Zip Code:</label>
-        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value="<?php echo isset($_POST['zipCode']) ? $_POST['zipCode'] : null; ?>" required><br><br>
-
+        <div class="gender">
         <label for="gender">Gender:</label>
+        <div class="gendertext">
         <select name="gender" id="gender" required>
             <option value="None" <?php echo isset($_POST['gender']) && $_POST['gender'] === 'None' ? ' selected' : ''; ?> disabled>Please pick a gender</option>
             <option value="Male" <?php echo isset($_POST['gender']) && $_POST['gender'] === 'Male' ? ' selected' : ''; ?>>Male</option>
             <option value="Female" <?php echo isset($_POST['gender']) && $_POST['gender'] === 'Female' ? ' selected' : ''; ?>>Female</option>
             <option value="Other" <?php echo isset($_POST['gender']) && $_POST['gender'] === 'Other' ? ' selected' : ''; ?>>Other</option>
         </select><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
-        
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required><br><br>
+        </div>
+        </div>
 
+        <div class="city">
+        <div class="citytext">
+        <input type="text" id="city" name="city" placeholder="City" value="<?php echo isset($_POST['city']) ? $_POST['city'] : null; ?>" required><br><br>
+        </div>
+        </div>
+
+        <div class="state">
+        <div class="statetext">
+        <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($_POST['stateProvince']) ? $_POST['stateProvince'] : null; ?>" required><br><br>
+        </div>
+        </div>
+
+        <div class="zip">
+        <div class="ziptext">
+        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value="<?php echo isset($_POST['zipCode']) ? $_POST['zipCode'] : null; ?>" required><br><br>
+        </div>
+        </div>
+
+        <div class="pass">
+        <label for="password">Password:</label>
+        <div class="passtext">
+        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+        </div>
+        </div>
+
+        <div class="confirm">
+        <label for="confirmPassword">Confirm Password:</label>
+        <div class="confirmtext">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required><br><br>
+        </div>
+        </div>
+        
+        <div class="agree">
         <input type="checkbox" id="agreeTerms" name="agreeTerms">
         <span class="required" id="agreeTermsError">By clicking, you agree to our <a href="#" onclick="showTermsAndConditions()">Terms and Conditions</a>.</span><br><br>
-        
-        <input type="submit" value="Register">
+        </div>
+
+        <input type="submit" class="regis" value="Register">
     </form>
 </div>
 
@@ -199,41 +248,12 @@
         <div class="term-content">
             <p>
                 This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
-                This is the content of the terms and conditions. Replace this with your actual terms and conditions text.
             </p>
         </div>
         <button onclick="closeTerms()">Close</button>
     </div>
+</div>
+<br>
 </div>
 
 <?php 

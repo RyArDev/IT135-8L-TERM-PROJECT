@@ -121,16 +121,18 @@
 <div class="login">
     <h2 class="logtext">Login</h2>
     <form method="POST" class="log-info">
-        <label for="username">Username:</label>
+        <label for="username"class="name">USERNAME:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
-        <label for="password">Password:</label>
+        <label for="password" class="pass">PASSWORD:</label>
         <input type="password" id="password" name="password" required>
         <br><br>
         <input type="submit" class="log-button" value="Login">
+
+        <h4 class="regs">Don't have an account? <a href="register">Register Now!</a></h4>
     </form>
 </div>
-<br>
+<br><br>
 </div>
 
 <?php 

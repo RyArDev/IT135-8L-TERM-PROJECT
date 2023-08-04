@@ -27,7 +27,7 @@
     <div class="navigation-bar">
       <div class="logo">
         <a href="#">
-          <img src="./assets/logo.jpg" alt="Logo">
+          <img src="./assets/images/pages/homepage/logo1.png" alt="Logo">
         </a>      <div class="circle"></div>
         <span class="logo-text">STA. CRUZ MAKATI</span>
       </div>
@@ -39,23 +39,23 @@
         <a href="history">History</a>
         <a href="forums">Forum</a>
         <a href="contact-us">Contact Us</a>
+        <!--<a href="logout">Logout</a>-->
+
+        <?php
+                       if(isset($_SESSION['user_id'])){
+
+                        echo "<li><a href='/profile'>" . $user['username'] . "</a></li>" .
+                        "<li><a href='utilities/authentication/logout.php'>Logout</a></li>";
+
+                    }else{
+
+                        echo "<a href='/login'>Login</a>";
+
+                    }
+?>
+
       </div>
 
-      <?php
-    if(isset($_SESSION['user_id'])){
-
-        echo 
-        "<a href='/profile'>" . $user['username'] .
-            "<img src='". $userProfile['profile_image_url'] . "'alt='User Avatar' class='avatar-icon' width='10%' align='right'/>
-        </a>";
-
-    }else{
-
-        echo "<a href='/login' role='button' data-toggle='modal' data-target='#loginModal'>Login</a>
-              <a href='/register' role='button' data-toggle='modal' data-target='#registerModal'>Register</a>";
-
-    }
-?>
     </div>
   </div>
 

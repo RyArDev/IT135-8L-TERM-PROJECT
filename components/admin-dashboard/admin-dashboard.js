@@ -94,6 +94,7 @@ function getFilteredUsers(searchValue) {
                                 <button class="editUserButton" onclick="toggleForm('editUserForm')"
                                     data-id="${user.user_id}"
                                     data-profileId=${user.user_profile_id}
+                                    data-roleId=${user.role_id}
                                     data-userDescription="${user.description}"
                                     data-username="${user.username}"
                                     data-firstName="${user.first_name}"
@@ -106,7 +107,7 @@ function getFilteredUsers(searchValue) {
                                     data-stateProvince="${addressParts.length >= 4 ? addressParts[3] : null}"
                                     data-zipCode="${addressParts.length >= 5 ? addressParts[4] : null}"
                                     data-gender="${user.gender}"
-                                    data-phoneNumber="${user.phone_number}"
+                                    data-phoneNumber="${user.phone_number === null ? '' : user.phone_number}"
                                     data-jobTitle="${user.job_title}"
                                     data-jobDescription="${user.job_description}"
                                 >Edit Profile</button>
@@ -497,6 +498,7 @@ function getEditUserButtons(){
 
             document.getElementById("userId").value = this.getAttribute("data-id");
             document.getElementById("profileId").value = this.getAttribute("data-profileId");
+            document.getElementById("role").value = this.getAttribute("data-roleId");
             document.getElementById("userDescription").value = this.getAttribute("data-userDescription");
             document.getElementById("username").value = this.getAttribute("data-username");
             document.getElementById("firstName").value = this.getAttribute("data-firstName");

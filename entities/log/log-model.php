@@ -121,4 +121,74 @@
 
     }
 
+    class LogForumPostCreate{
+
+        public $title;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogForumPostEdit{
+
+        public $forumId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogForumPostDelete{
+
+        public $forumId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogForumTypeCreate{
+
+        public $type;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogForumTypeEdit{
+
+        public $forumTypeId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
+    class LogForumTypeDelete{
+
+        public $forumTypeId;
+        public $userId;
+        public $time;
+        public $status;
+        public $sourceIpAddress;
+        public $destinationIpAddress;
+        public $userAgent;
+
+    }
+
 ?>

@@ -145,7 +145,7 @@
 
     }
 
-    function updateLogs(LogEdit $logEdit){
+    function updateLogById(LogEdit $logEdit){
 
         try {
 
@@ -176,7 +176,7 @@
 
     }
 
-    function deleteLogsById($logId){
+    function deleteLogById($logId){
 
         try {
 
@@ -508,6 +508,190 @@
         } catch (Exception $e) {
             
             echo "Creating Announcement Deletion Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumCreate(LogForumPostCreate $forumCreateLog){
+
+        try {
+
+            $description = array(
+                'title' => $forumCreateLog->title,
+                'time' => $forumCreateLog->time,
+                'status' => $forumCreateLog->status,
+                'source_ip_address' => $forumCreateLog->sourceIpAddress,
+                'destination_ip_address' => $forumCreateLog->destinationIpAddress,
+                'user_agent' => $forumCreateLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Creation Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumEdit(LogForumPostEdit $forumEditLog){
+
+        try {
+
+            $description = array(
+                'forum_id' => $forumEditLog->forumId,
+                'user_id' => $forumEditLog->userId,
+                'time' => $forumEditLog->time,
+                'status' => $forumEditLog->status,
+                'source_ip_address' => $forumEditLog->sourceIpAddress,
+                'destination_ip_address' => $forumEditLog->destinationIpAddress,
+                'user_agent' => $forumEditLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Edit Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumDelete(LogForumPostDelete $forumDeleteLog){
+
+        try {
+
+            $description = array(
+                'forum_id' => $forumDeleteLog->forumId,
+                'user_id' => $forumDeleteLog->userId,
+                'time' => $forumDeleteLog->time,
+                'status' => $forumDeleteLog->status,
+                'source_ip_address' => $forumDeleteLog->sourceIpAddress,
+                'destination_ip_address' => $forumDeleteLog->destinationIpAddress,
+                'user_agent' => $forumDeleteLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Deletion Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumTypeCreate(LogForumTypeCreate $forumTypeCreateLog){
+
+        try {
+
+            $description = array(
+                'type' => $forumTypeCreateLog->type,
+                'time' => $forumTypeCreateLog->time,
+                'status' => $forumTypeCreateLog->status,
+                'source_ip_address' => $forumTypeCreateLog->sourceIpAddress,
+                'destination_ip_address' => $forumTypeCreateLog->destinationIpAddress,
+                'user_agent' => $forumTypeCreateLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Type Creation Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumTypeEdit(LogForumTypeEdit $forumTypeEditLog){
+
+        try {
+
+            $description = array(
+                'forum_type_id' => $forumTypeEditLog->forumTypeId,
+                'user_id' => $forumTypeEditLog->userId,
+                'time' => $forumTypeEditLog->time,
+                'status' => $forumTypeEditLog->status,
+                'source_ip_address' => $forumTypeEditLog->sourceIpAddress,
+                'destination_ip_address' => $forumTypeEditLog->destinationIpAddress,
+                'user_agent' => $forumTypeEditLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Type Edit Logs Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
+    function createLogForumTypeDelete(LogForumTypeDelete $forumTypeDeleteLog){
+
+        try {
+
+            $description = array(
+                'forum_type_id' => $forumTypeDeleteLog->forumTypeId,
+                'user_id' => $forumTypeDeleteLog->userId,
+                'time' => $forumTypeDeleteLog->time,
+                'status' => $forumTypeDeleteLog->status,
+                'source_ip_address' => $forumTypeDeleteLog->sourceIpAddress,
+                'destination_ip_address' => $forumTypeDeleteLog->destinationIpAddress,
+                'user_agent' => $forumTypeDeleteLog->userAgent
+            );
+
+            if (empty($description)) {
+
+                return null;
+
+            }
+
+            return json_encode($description);
+
+        } catch (Exception $e) {
+            
+            echo "Creating Forum Type Deletion Logs Failed: " . $e->getMessage();
             return;
 
         }

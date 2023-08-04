@@ -71,13 +71,24 @@ function getFilteredUsers(searchValue) {
 
                 if(responseData.searchedUser !== null){
 
+                    const roleTypeMap = {
+                        1: 'None',
+                        2: 'User',
+                        3: 'Officer',
+                        4: 'Admin'
+                    };
+
                     const filteredUsers = responseData.searchedUser.filter(user => {
+                        
+                        let roleTypeWord = roleTypeMap[user.role_id] || '';
+
                         return (
                             String(user.user_id).includes(searchValue) ||
                             user.username.toLowerCase().includes(searchValue.toLowerCase()) ||
                             user.first_name.toLowerCase().includes(searchValue.toLowerCase()) ||
                             user.last_name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                            user.email.toLowerCase().includes(searchValue.toLowerCase())
+                            user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            roleTypeWord.toLowerCase().includes(searchValue.toLowerCase())
                         );
                     });
 
@@ -94,6 +105,7 @@ function getFilteredUsers(searchValue) {
                                 <button class="editUserButton" onclick="toggleForm('editUserForm')"
                                     data-id="${user.user_id}"
                                     data-profileId=${user.user_profile_id}
+                                    data-roleId=${user.role_id}
                                     data-userDescription="${user.description}"
                                     data-username="${user.username}"
                                     data-firstName="${user.first_name}"
@@ -106,7 +118,7 @@ function getFilteredUsers(searchValue) {
                                     data-stateProvince="${addressParts.length >= 4 ? addressParts[3] : null}"
                                     data-zipCode="${addressParts.length >= 5 ? addressParts[4] : null}"
                                     data-gender="${user.gender}"
-                                    data-phoneNumber="${user.phone_number}"
+                                    data-phoneNumber="${user.phone_number === null ? '' : user.phone_number}"
                                     data-jobTitle="${user.job_title}"
                                     data-jobDescription="${user.job_description}"
                                 >Edit Profile</button>
@@ -261,7 +273,6 @@ function getFilteredAnnouncements(searchValue) {
     
     };
 
-
 }
 
 function getFilteredLogs(searchValue) {
@@ -316,17 +327,16 @@ function getFilteredLogs(searchValue) {
                                 <tr>
                                     <td>${log.log_id}</td>
                                     <td>${log.table_name}</td>
-                                    <td>${JSON.stringify(log.description)}</td>
+                                    <td>${JSON.stringify(JSON.parse(log.description), null, 2)}</td>
                                     <td>${log.date_created}</td>
                                     <td>${log.user_id}</td>
                                     <td>
                                         <button class="editLogButton" onclick="toggleForm('editLogForm')"
                                             data-id="${log.log_id}"
                                             data-tableName="${log.table_name}"
-                                            data-description="${JSON.stringify(log.description)}"
+                                            data-description="${JSON.stringify(JSON.parse(log.description)).replace(/"/g, "'")}"
                                             data-dateCreated="${log.date_created}"
                                             data-userId="${log.user_id}"
-                                            disabled
                                         >
                                             Edit Log
                                         </button>
@@ -334,7 +344,7 @@ function getFilteredLogs(searchValue) {
                                     <td>
                                         <form class="deleteLogForm" method="POST">
                                             <input type="hidden" name="logId" value="${log.log_id}">
-                                            <button type="submit" name="deleteLogForm" disabled>Delete Log</button>
+                                            <button type="submit" name="deleteLogForm">Delete Log</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -343,7 +353,7 @@ function getFilteredLogs(searchValue) {
                     `;
 
                     document.getElementById('logsList').innerHTML = logsTable;
-                    //getEditLogButtons();
+                    getEditLogButtons();
 
                 }else{
 
@@ -367,6 +377,116 @@ function getFilteredLogs(searchValue) {
     
     };
 
+}
+
+function getFilteredForumPosts(searchValue) {
+
+    let responseData = null;
+
+    if (!searchValue.trim()) {
+
+        document.getElementById('forumsList').innerHTML = '';
+        document.getElementById('forumsList').textContent = 'Forum Post/s not found.';
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', `entities/forum/forum-controller.php?action=getForumsBySearch&searchValue=${searchValue}`, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('jwt_token'));
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            
+            if (xhr.status === 200) {
+                
+                responseData = JSON.parse(xhr.responseText.trim());
+
+                if(responseData.searchedForums !== null){
+    
+                    const filteredForums = responseData.searchedForums.filter(forum => {
+                        
+                        return (
+                            String(forum.forum_id).includes(searchValue) ||
+                            String(forum.user_id).includes(searchValue) ||
+                            String(forum.forum_type_id).includes(searchValue) ||
+                            forum.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            forum.body.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            forum.date_created.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            forum.date_modified.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            forum.type.toLowerCase().includes(searchValue.toLowerCase())
+                        );
+                    });
+
+                    let forumsTable = `
+                        <table>
+                            <tr>
+                                <th>Forum ID</th>
+                                <th>Title</th>
+                                <th>Body</th>
+                                <th>Date Created</th>
+                                <th>Date Modified</th>
+                                <th>User ID</th>
+                                <th>Forum Type ID</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            ${filteredForums.map(forum => `
+                                <tr>
+                                    <td>${forum.forum_id}</td>
+                                    <td>${forum.title}</td>
+                                    <td>${decodeHTMLEntities(forum.body)}</td>
+                                    <td>${forum.date_created}</td>
+                                    <td>${forum.date_modified}</td>
+                                    <td>${forum.user_id}</td>
+                                    <td>${forum.forum_type_id}</td>
+                                    <td>
+                                        <button class="editForumPostButton" onclick="toggleForm('editForumPostForm')"
+                                            data-id="${forum.forum_id}"
+                                            data-title="${forum.title}"
+                                            data-body="${forum.body}"
+                                            data-typeId="${forum.forum_type_id}"
+                                        >
+                                            Edit Forum Post
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <form class="deleteForumPostForm" method="POST">
+                                            <input type="hidden" name="forumId" value="${forum.forum_id}">
+                                            <button type="submit" name="deleteForumPostForm">Delete Forum Post</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    `;
+
+                    document.getElementById('forumsList').innerHTML = forumsTable;
+                    getEditForumPostButtons();
+
+                }else{
+
+                    document.getElementById('forumsList').textContent = 'Forum Post/s not found.';
+
+                }
+            
+            } else {
+
+                document.getElementById('forumsList').textContent = 'Forum Post/s not found.';
+            
+            }
+
+        }
+
+    };
+
+    xhr.onerror = function () {
+
+        document.getElementById('forumsList').textContent = 'There is an error fetching the data.';
+    
+    };
 
 }
 
@@ -389,6 +509,7 @@ function getEditUserButtons(){
 
             document.getElementById("userId").value = this.getAttribute("data-id");
             document.getElementById("profileId").value = this.getAttribute("data-profileId");
+            document.getElementById("role").value = this.getAttribute("data-roleId");
             document.getElementById("userDescription").value = this.getAttribute("data-userDescription");
             document.getElementById("username").value = this.getAttribute("data-username");
             document.getElementById("firstName").value = this.getAttribute("data-firstName");
@@ -447,14 +568,7 @@ function getEditLogButtons(){
             document.getElementById("logId").value = this.getAttribute("data-id");
             document.getElementById("logTableName").value = this.getAttribute("data-tableName");
             document.getElementById("logUserId").value = this.getAttribute("data-userId");
-
-            const logDescription = ckEditorInstances['logDescription'];
-            
-            if (logDescription) {
-
-                logDescription.setData(this.getAttribute("data-description"));
-
-            }
+            document.getElementById("logDescription").innerText = this.getAttribute("data-description");
 
         });
 
@@ -481,15 +595,16 @@ function initializeAdminReports(){
         if (event.key === 'Enter') getFilteredLogs(this.value);
     });
 
+    const searchForumsPostInput = document.getElementById('searchForumsPostInput');
+    searchForumsPostInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') getFilteredForumPosts(this.value);
+    });
+
 }
 
 initializeAdminReports();
 
 /*
-
-    Logs (Display in Admin Dashboard)
-
-    Forums
     Tickets (Contact-Us) (Display in Admin Dashboard)
 
     Active User Count (Daily, Weekly, Monthly) (Display in Admin Dashboard)

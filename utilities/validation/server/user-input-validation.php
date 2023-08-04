@@ -115,6 +115,32 @@
 
     }
 
+    function validateAdminUser(UserAdminEdit $userEdit){
+
+        $errors = array();
+
+        if(!validateUserUsername($userEdit->userId, $userEdit->username)){
+
+            $errors[] = "Invalid or Taken Username (4 - 16 characters).";
+
+        }
+
+        if(!validateUserEmail($userEdit->userId, $userEdit->email)){
+
+            $errors[] = "Invalid or Taken Email.";
+
+        }
+
+        if(!validateUserRoles($userEdit->roleId)){
+
+            $errors[] = "Invalid Role.";
+
+        }
+
+        return $errors;
+
+    }
+
     function validateUserProfile(UserProfileEdit $userEditProfile){
 
         $errors = array();
@@ -605,7 +631,7 @@
         }
 
         // Job title pattern: allow letters, numbers, spaces, and common special characters, 2 to 32 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $jobTitle);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $jobTitle);
 
     }
 
@@ -627,7 +653,7 @@
         $jobDescription = cleanHtml($jobDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $jobDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $jobDescription);
 
     }
 
@@ -649,8 +675,19 @@
         $userDescription = cleanHtml($userDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $userDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $userDescription);
 
+    }
+
+    function validateUserRoles($id) {
+        // Convert the input to an integer
+        $id = (int)$id;
+    
+        // Define the valid options for the select element
+        $validOptions = [1, 2, 3, 4];
+    
+        // Check if the input is one of the valid options
+        return in_array($id, $validOptions);
     }
 
     function validateUserAgreedToTerms($agreeTerms) {

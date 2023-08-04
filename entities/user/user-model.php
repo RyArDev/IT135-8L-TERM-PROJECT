@@ -63,6 +63,15 @@
 
     }
 
+    class UserAdminEdit{ //All Information for the User to Edit
+
+        public $userId;
+        public $username;
+        public $email;
+        public $roleId;
+
+    }
+
     class UserProfileEdit{ //All Information for the User Profile to Edit
 
         public $userProfileId;

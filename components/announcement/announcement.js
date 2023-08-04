@@ -30,8 +30,6 @@ function getEditAnnouncementButtons(){
             document.getElementById("editType").value = this.getAttribute("data-type");
             
             const editBodyEditor = ckEditorInstances['editBody'];
-
-            console.log(this.getAttribute("data-body"));
             
             if (editBodyEditor) {
 

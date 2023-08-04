@@ -1,11 +1,11 @@
 {
     "DATABASE":{
-        "Type": "",
-        "Host": "",
-        "Port": null,
-        "User": "",
-        "Password": "",
-        "Name": ""
+        "Type": "mysql",
+        "Host": "sql301.infinityfree.com",
+        "Port": 3306,
+        "User": "if0_34741187",
+        "Password": "kC2bj8mg3m",
+        "Name": "if0_34741187_barangay_sta_cruz"
     },
     "FILE_DIRECTORY":{
         "Images":{

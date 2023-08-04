@@ -353,6 +353,38 @@
 
     }
 
+    function adminUpdateUser(UserAdminEdit $user){
+
+        try{
+
+            // Prepare the query
+            $params = [
+                $user->userId,
+                $user->username,
+                $user->email,
+                $user->roleId
+            ];
+
+            //Queries the results
+            $result = executeStoredProcedure("WebApp_Users_AdminUpdateInfoById", $params);
+
+            if (!$result) {
+
+                return false;
+
+            }
+
+            return true;
+            
+        } catch (Exception $e) {
+            
+            echo "Updating User Information Failed: " . $e->getMessage();
+            return;
+
+        }
+
+    }
+
     function updateUserProfileByUserId(UserProfileEdit $userProfile){
 
         try{

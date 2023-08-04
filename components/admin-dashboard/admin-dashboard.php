@@ -10,6 +10,7 @@
     //Checks if the user is logged in before.
     include_once('utilities/authentication/auth-controller.php');
     $user = checkUserLogin();
+    $userProfile = checkUserProfile();
     $_SESSION['current_page'] = "admin-dashboard";
 
     if($user['role_id'] < 3){
@@ -60,17 +61,18 @@
             $userProfileErrors = array();
             $profileImageErrors = array();
 
-            $userEdit = new UserEdit();
-            $userEdit->userId = $user['user_id'];
+            $userEdit = new UserAdminEdit();
+            $userEdit->userId = isset($_POST['userId']) ? $_POST['userId'] : null;
             $userEdit->username = isset($_POST['username']) ? $_POST['username'] : null;
             $userEdit->email = isset($_POST['email']) ? $_POST['email'] : null;
+            $userEdit->roleId = isset($_POST['role']) ? $_POST['role'] : null;
 
             $userProfileEdit = new UserProfileEdit();
             $userProfileEdit->userProfileId = $userProfile['user_profile_id'];
             $userProfileEdit->firstName = isset($_POST['firstName']) ? $_POST['firstName'] : null;
             $userProfileEdit->lastName = isset($_POST['lastName']) ? $_POST['lastName'] : null;
             $userProfileEdit->birthDate = isset($_POST['birthDate']) ? $_POST['birthDate'] : null;
-            $userProfileEdit->userId = $user['user_id'];
+            $userProfileEdit->userId = isset($_POST['userId']) ? $_POST['userId'] : null;
 
             $fullAddress = "";
 
@@ -121,7 +123,7 @@
             $userEdit = sanitizeUserClass($userEdit);
             $userProfileEdit = sanitizeUserClass($userProfileEdit);
 
-            $userErrors = validateUser($userEdit);
+            $userErrors = validateAdminUser($userEdit);
             $userProfileErrors = validateUserProfile($userProfileEdit);
 
             $userEditLog = new LogUserEdit();
@@ -231,7 +233,7 @@
             $userProfileEdit->jobDescription = sanitizeUserInput(moveCkFinderImages($userProfileEdit->userId, $userProfileEdit->jobDescription, "User", $previousImagePaths));
             cleanUpCkFinderImageDirectory($userProfileEdit->userId, "User", $previousImagePaths);
 
-            $userUpdateSuccess = updateUser($userEdit);
+            $userUpdateSuccess = adminUpdateUser($userEdit);
             $userProfileUpdateSuccess = updateUserProfileByUserId($userProfileEdit);
 
             if (!$userUpdateSuccess || !$userProfileUpdateSuccess) {
@@ -931,6 +933,14 @@
             <label for="profileBanner">Add Profile Banner (Max 5MB):</label>
             <img src="#" id="previewProfileBanner" alt="Preview Profile Banner" style="max-width: 970px; max-height: 250px; display: none;">
             <input type="file" name="profileBanner" id="profileBanner" accept="image/*"><br><br>
+
+            <label for="role">Role:</label>
+            <select name="role" id="role" required>
+                <option value="1">None</option>
+                <option value="2">User</option>
+                <option value="3">Officer</option>
+                <option value="4">Admin</option>
+            </select><br><br>
 
             <label for="userDescription">User Bio:</label>
             <textarea id="userDescription" name="userDescription" placeholder="User Description"></textarea><br><br>

@@ -505,6 +505,327 @@
 
     }
 
+    function editLog(){
+
+        $message = "";
+        $type = "";
+        $logErrors = array();
+
+        $logEdit = new LogEdit();
+        $logEdit->logId = isset($_POST['logId']) ? $_POST['logId'] : null;
+        $logEdit->tableName = isset($_POST['logTableName']) ? $_POST['logTableName'] : null;
+        $logEdit->description = isset($_POST['logDescription']) ? $_POST['logDescription'] : null;
+        $logEdit->description = str_replace("'", '"', $logEdit->description);
+
+        $logErrors = validateEditLog($logEdit);
+
+        if (!empty($logErrors)){
+
+            $message .= "Log Edit Error:<br>";
+
+                foreach ($logErrors as $error) {
+ 
+                    $message .= "- $error<br>";
+
+                }
+
+                $type = 'error';
+                showAlert($message, $type);
+                return;
+
+        }
+
+        $logEditSuccess = updateLogById($logEdit);
+
+        if (!$logEditSuccess) {
+
+            $message = 'Log Edited Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            return;
+
+        }
+
+        $message = 'Log Edited Successfully!';
+        $type = 'success';
+
+        showAlert($message, $type);
+
+    }
+
+    function deleteLog(){
+
+        $message = "";
+        $type = "";
+
+        $logDeleteSuccess = deleteLogById($_POST['logId']);
+
+        if (!$logDeleteSuccess) {
+
+            $message = 'Log Deleted Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            return;
+
+        }
+
+        $message = 'Log Deleted Successfully!';
+        $type = 'success';
+
+        showAlert($message, $type);
+
+    }
+
+    function addForumType($user, &$logDescription, &$logUserId){
+
+        $message = "";
+        $type = "";
+        $forumTypeErrors = array();
+        
+        $forumTypeCreate = new ForumTypeCreate();
+        $forumTypeCreate->type = isset($_POST['forumTopicType']) ? $_POST['forumTopicType'] : null;
+
+        $forumTypeCreate = sanitizeForumClass($forumTypeCreate);
+        $forumTypeErrors = validateAddForumType($forumTypeCreate);
+
+        $forumTypeCreateLog = new LogForumTypeCreate();
+        $forumTypeCreateLog->type = $forumTypeCreate->type;
+        $forumTypeCreateLog->time = new DateTime();
+        $forumTypeCreateLog->status = 'forum type creation pending';
+        $forumTypeCreateLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $forumTypeCreateLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $forumTypeCreateLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $logUserId = $user['user_id'];
+
+        if (!empty($forumTypeErrors)){
+
+            $message .= "Forum Topic Creation Error:<br>";
+
+                foreach ($forumTypeErrors as $error) {
+ 
+                    $message .= "- $error<br>";
+
+                }
+
+                $type = 'error';
+                showAlert($message, $type);
+                $forumTypeCreateLog->status = 'forum type creation failed';
+                $logDescription = createLogForumTypeCreate($forumTypeCreateLog);
+                return;
+
+        }
+
+        $forumTypeCreateSuccess = createForumType($forumTypeCreate);
+
+        if (!$forumTypeCreateSuccess) {
+
+            $message = 'Forum Topic Created Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            $forumTypeCreateLog->status = 'forum type creation failed';
+            $logDescription = createLogForumTypeCreate($forumTypeCreateLog);
+            return;
+
+        }
+
+        $message = 'Forum Type Created Successfully!';
+        $type = 'success';
+        $forumTypeCreateLog->status = 'forum type creation success';
+        $logDescription = createLogForumTypeCreate($forumTypeCreateLog);
+
+        showAlert($message, $type);
+
+    }
+
+    function addForumPost($user, &$logDescription, &$logUserId){
+
+        $message = "";
+        $type = "";
+        $forumPostErrors = array();
+        
+        $forumPostCreate = new ForumCreate();
+        $forumPostCreate->title = isset($_POST['addForumPostTitle']) ? $_POST['addForumPostTitle'] : null;
+        $forumPostCreate->body = isset($_POST['addForumPostBody']) ? $_POST['addForumPostBody'] : null;
+        $forumPostCreate->forumTypeId = isset($_POST['addForumTypeId']) ? $_POST['addForumTypeId'] : null;
+        $forumPostCreate->userId = $user['user_id'];
+
+        $forumPostCreate = sanitizeForumClass($forumPostCreate);
+        $forumPostErrors = validateAddForumPost($forumPostCreate);
+
+        $forumPostCreateLog = new LogForumPostCreate();
+        $forumPostCreateLog->title = $forumPostCreate->title;
+        $forumPostCreateLog->time = new DateTime();
+        $forumPostCreateLog->status = 'forum type creation pending';
+        $forumPostCreateLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $forumPostCreateLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $forumPostCreateLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $logUserId = $user['user_id'];
+
+        if (!empty($forumPostErrors)){
+
+            $message .= "Forum Post Creation Error:<br>";
+
+                foreach ($forumPostErrors as $error) {
+ 
+                    $message .= "- $error<br>";
+
+                }
+
+                $type = 'error';
+                showAlert($message, $type);
+                $forumPostCreateLog->status = 'forum post creation failed';
+                $logDescription = createLogForumCreate($forumPostCreateLog);
+                return;
+
+        }
+
+        $forumPostCreateSuccess = createForum($forumPostCreate);
+
+        if (!$forumPostCreateSuccess) {
+
+            $message = 'Forum Post Created Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            $forumPostCreateLog->status = 'forum post creation failed';
+            $logDescription = createLogForumCreate($forumPostCreateLog);
+            return;
+
+        }
+
+        $latestForumPost = getLatestForum();
+
+        $forumEdit = new ForumEdit();
+        $forumEdit->forumId = $latestForumPost['forum_id'];
+        $forumEdit->title = $forumPostCreate->title;
+        $forumEdit->forumTypeId = $forumPostCreate->forumTypeId;
+
+        $previousImagePaths = array();
+        $forumEdit->body = sanitizeForumInput(moveCkFinderImages($forumEdit->forumId, $forumPostCreate->body, "Forum", $previousImagePaths));
+        cleanUpCkFinderImageDirectory($forumEdit->forumId, "Forum", $previousImagePaths);
+
+        updateForumById($forumEdit);
+
+        $message = 'Forum Post Created Successfully!';
+        $type = 'success';
+        $forumPostCreateLog->status = 'forum post creation success';
+        $logDescription = createLogForumCreate($forumPostCreateLog);
+
+        showAlert($message, $type);
+
+    }
+
+    function editForumPost($user, &$logDescription, &$logUserId){
+
+        $message = "";
+        $type = "";
+        $forumPostErrors = array();
+
+        $forumEdit = new ForumEdit();
+        $forumEdit->forumId = isset($_POST['forumPostId']) ? $_POST['forumPostId'] : null;
+        $forumEdit->title = isset($_POST['forumPostTitle']) ? $_POST['forumPostTitle'] : null;
+        $forumEdit->body = isset($_POST['forumPostBody']) ? $_POST['forumPostBody'] : null;
+        $forumEdit->forumTypeId = isset($_POST['forumPostTypeId']) ? $_POST['forumPostTypeId'] : 1;
+
+        $forumEdit = sanitizeForumClass($forumEdit);
+        $forumPostErrors = validateEditForumPost($forumEdit);
+
+        $forumEditLog = new LogForumPostEdit();
+        $forumEditLog->forumId = $forumEdit->forumId;
+        $forumEditLog->userId = $user['user_id'];
+        $logUserId = $user['user_id'];
+        $forumEditLog->time = new DateTime();
+        $forumEditLog->status = 'forum edit pending';
+        $forumEditLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $forumEditLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $forumEditLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (!empty($forumPostErrors)){
+
+            $message .= "Forum Post Edit Error:<br>";
+
+                foreach ($forumPostErrors as $error) {
+ 
+                    $message .= "- $error<br>";
+
+                }
+
+                $type = 'error';
+                showAlert($message, $type);
+                $forumEditLog->status = 'forum edit failed';
+                $logDescription = createLogForumEdit($forumEditLog);
+                return;
+
+        }
+
+        $forumEditSuccess = updateForumById($forumEdit);
+
+        if (!$forumEditSuccess) {
+
+            $message = 'Forum Edited Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            $forumEditLog->status = 'forum edit failed';
+            $logDescription = createLogForumEdit($forumEditLog);
+            return;
+
+        }
+
+        $previousImagePaths = array();
+        $forumEdit->body = sanitizeForumInput(moveCkFinderImages($forumEdit->forumId, $forumEdit->body, "Forum", $previousImagePaths));
+        cleanUpCkFinderImageDirectory($forumEdit->forumId, "Forum", $previousImagePaths);
+
+        updateForumById($forumEdit);
+
+        $message = 'Forum Edited Successfully!';
+        $type = 'success';
+        $forumEditLog->status = 'forum edit success';
+        $logDescription = createLogForumEdit($forumEditLog);
+
+        showAlert($message, $type);
+
+    }
+
+    function deleteForumPost($user, &$logDescription, &$logUserId){
+
+        $message = "";
+        $type = "";
+
+        $previousImagePaths = array();
+        moveCkFinderImages($_POST['forumId'], "", "Forum", $previousImagePaths);
+        cleanUpCkFinderImageDirectory($_POST['forumId'], "Forum", $previousImagePaths);
+
+        $forumDeleteSuccess = deleteForumById($_POST['forumId']);
+
+        $forumPostDeleteLog = new LogForumPostDelete();
+        $forumPostDeleteLog->forumId = $_POST['forumId'];
+        $forumPostDeleteLog->userId = $user['user_id'];
+        $logUserId = $user['user_id'];
+        $forumPostDeleteLog->time = new DateTime();
+        $forumPostDeleteLog->status = 'announcement deletion pending';
+        $forumPostDeleteLog->sourceIpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
+        $forumPostDeleteLog->destinationIpAddress = gethostbyname($_SERVER['HTTP_HOST']);
+        $forumPostDeleteLog->userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (!$forumDeleteSuccess) {
+
+            $message = 'Forum Post Deleted Unsuccessfully!';
+            $type = 'error';
+            showAlert($message, $type);
+            $forumPostDeleteLog->status = 'forum post deletion failed';
+            $logDescription = createLogForumDelete($forumPostDeleteLog);
+            return;
+
+        }
+
+        $message = 'Forum Post Deleted Successfully!';
+        $type = 'success';
+        $forumPostDeleteLog->status = 'forum post deletion success';
+        $logDescription = createLogForumDelete($forumPostDeleteLog);
+
+        showAlert($message, $type);
+
+    }
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $logCreate = new LogCreate();
@@ -515,6 +836,7 @@
 
             $logCreate->tableName = 'announcements';
             addAnnouncement($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
 
         }
 
@@ -522,6 +844,7 @@
 
             $logCreate->tableName = 'announcements';
             editAnnouncement($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
 
         }
 
@@ -529,6 +852,7 @@
 
             $logCreate->tableName = 'announcements';
             deleteAnnouncement($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
 
         }
 
@@ -536,11 +860,52 @@
 
             $logCreate->tableName = 'users';
             updateUserAndProfile($user, $userProfile, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
 
         }
 
-        createLog($logCreate);
-        $announcements = getAllAnnouncements();
+        if (isset($_POST["editLogForm"])) {
+
+            editLog();
+
+        }
+
+        if (isset($_POST["deleteLogForm"])) {
+
+            deleteLog();
+
+        }
+
+        if (isset($_POST["addForumTypeForm"])) {
+
+            $logCreate->tableName = 'forums';
+            addForumType($user, $logCreate->description, $logCreate->userId);
+
+        }
+
+        if (isset($_POST["addForumPostForm"])) {
+
+            $logCreate->tableName = 'forums';
+            addForumPost($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
+
+        }
+
+        if (isset($_POST["editForumPostForm"])) {
+
+            $logCreate->tableName = 'forums';
+            editForumPost($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
+
+        }
+
+        if (isset($_POST["deleteForumPostForm"])) {
+
+            $logCreate->tableName = 'forums';
+            deleteForumPost($user, $logCreate->description, $logCreate->userId);
+            createLog($logCreate);
+
+        }
         
     }
 
@@ -698,12 +1063,74 @@
 
 <div>
     <h1>Forum Moderation</h1>
+    <button id="addForumTypeButton" onclick="toggleForm('addForumTypeForm')">Add Forum Topic</button><br/>
+    <div class="search-bar">
+        <input type="text" id="searchForumsPostInput" placeholder="Search Forum Posts">
+    </div>
+
+    <div id="addForumTypeForm" class="hidden-form">
+        <h2>Add a Topic</h2>
+        <form method="POST">
+            <label for="forumTopicType">Topic:</label>
+            <input type="text" name="forumTopicType" id="forumTopicType" placeholder="Topic" required><br>
+            
+            <input type="submit" name="addForumTypeForm" value="Submit">
+            <button type="button" onclick="toggleForm('addForumTypeForm')">Cancel</button>
+        </form>
+    </div>
+
+    <div id="addForumPostForm" class="hidden-form">
+        <h2>Add a Post</h2>
+        <form method="POST">
+            <label for="addForumPostTitle">Title:</label>
+            <input type="text" name="addForumPostTitle" id="addForumPostTitle" placeholder="Title" required><br>
+            <input type="hidden" name="addForumTypeId" id="addForumTypeId" required><br>
+            <textarea name="addForumPostBody" id="addForumPostBody"></textarea><br>
+            
+            <input type="submit" name="addForumPostForm" value="Submit">
+            <button type="button" onclick="toggleForm('addForumPostForm')">Cancel</button>
+        </form>
+    </div>
+
+    <div id="editForumPostForm" class="hidden-form">
+        <h2>Edit Post</h2>
+        <form method="POST">
+            <label for="forumPostId">ID:</label>
+            <input type="text" name="forumPostId" id="forumPostId" placeholder="ID" readonly><br>
+            <label for="forumPostTitle">Title:</label>
+            <input type="text" name="forumPostTitle" id="forumPostTitle" placeholder="Title" required><br>
+            <input type="hidden" name="forumPostTypeId" id="forumPostTypeId" required><br>
+            <textarea name="forumPostBody" id="forumPostBody"></textarea><br>
+            
+            <input type="submit" name="editForumPostForm" value="Submit">
+            <button type="button" onclick="toggleForm('editForumPostForm')">Cancel</button>
+        </form>
+    </div>
+
+    <div id="forumsList">
+        
+    </div>
 </div>
 
 <div>
     <h1>Logs Moderation</h1>
     <div class="search-bar">
         <input type="text" id="searchLogsInput" placeholder="Search Logs">
+    </div>
+    <div id="editLogForm" class="hidden-form">
+        <h2>Edit Logs</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="logId">ID:</label>
+            <input type="text" name="logId" id="logId" placeholder="ID" readonly><br>
+            <label for="logTableName">Table Name:</label>
+            <input type="text" name="logTableName" id="logTableName" placeholder="Table Name" required><br>
+            <label for="logUserId">User ID:</label>
+            <input type="text" name="logUserId" id="logUserId" placeholder="ID" readonly><br>
+            <textarea name="logDescription" id="logDescription" rows="6" cols="100" maxlength="5000"></textarea><br>
+
+            <input type="submit" name="editLogForm" value="Submit">
+            <button type="button" onclick="toggleForm('editLogForm')">Cancel</button>
+        </form>
     </div>
     <div id="logsList">
         
@@ -739,7 +1166,10 @@
         ["body", 5000], 
         ["editBody", 5000],
         ["userDescription", 2500],
-        ["jobDescription", 2500]
+        ["jobDescription", 2500],
+        ["forumPostBody", 5000],
+        ["addForumPostBody", 5000]
     ]);
     import_js("announcement");
+    import_js("forum");
 ?>

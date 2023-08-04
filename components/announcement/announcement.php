@@ -353,6 +353,7 @@
         <?php } ?>
     </div>
 </div>
+
 <?php 
     //Imports Javascript
     require_once('utilities/validation/server/js-validation.php');

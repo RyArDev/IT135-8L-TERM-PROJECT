@@ -1,7 +1,7 @@
 DELIMITER $$
 
 CREATE PROCEDURE WebApp_Users_GetBySearchCriteria(
-    param_search_value TEXT
+    IN param_search_value TEXT
 )
 BEGIN
     SELECT 

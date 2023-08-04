@@ -1,7 +1,7 @@
 <?php
 
     require_once('utilities/database/db-controller.php');
-    require_once('entities/user/user-model.php');
+    require_once('entities/announcement/announcement-model.php');
     require_once('plugins/html-purifier.php');
 
     function validateAddAnnouncement(AnnouncementCreate $announcementCreate){
@@ -97,6 +97,7 @@
             }
 
         return $object;
+
     }
 
     function sanitizeAnnouncementInput($input){
@@ -122,6 +123,7 @@
         }
 
         return $input;
+
     }
 
     function validateAnnouncementTitle($title){
@@ -134,7 +136,8 @@
 
         $title = cleanHtml($title);
 
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $title);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $title);
+
     }
 
     function validateAnnouncementBody($body){
@@ -147,7 +150,7 @@
 
         $body = cleanHtml($body);
 
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $body);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $body);
 
     }
 
@@ -161,6 +164,5 @@
         // Check if the input is one of the valid options
         return in_array($type, $validOptions);
     }
-
 
 ?>

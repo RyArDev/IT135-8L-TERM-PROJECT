@@ -605,7 +605,7 @@
         }
 
         // Job title pattern: allow letters, numbers, spaces, and common special characters, 2 to 32 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-\.,\'":;!()@#$%^&*_+=<>?]+$/', $jobTitle);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $jobTitle);
 
     }
 
@@ -627,7 +627,7 @@
         $jobDescription = cleanHtml($jobDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $jobDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $jobDescription);
 
     }
 
@@ -649,7 +649,7 @@
         $userDescription = cleanHtml($userDescription);
         
         // Job description pattern: allow letters, numbers, spaces, and common special characters, 2 to 64 characters long
-        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/]+$/', $userDescription);
+        return preg_match('/^[a-zA-Z0-9\s\-.,\'":;!()@#$%^&*_+=<>?\/{}[\]]+$/', $userDescription);
 
     }
 

@@ -4,7 +4,7 @@ CREATE TABLE tickets (
     body VARCHAR(5000) NOT NULL,
     date_created DATETIME NOT NULL,
     date_modified DATETIME NOT NULL,
-    user_id INT(11) UNSIGNED NOT NULL,
+    user_id INT(11) UNSIGNED NULL,
     status_id INT(11) UNSIGNED NOT NULL,
     priority_id INT(11) UNSIGNED NOT NULL
 );

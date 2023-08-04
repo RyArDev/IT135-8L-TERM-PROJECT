@@ -71,13 +71,24 @@ function getFilteredUsers(searchValue) {
 
                 if(responseData.searchedUser !== null){
 
+                    const roleTypeMap = {
+                        1: 'None',
+                        2: 'User',
+                        3: 'Officer',
+                        4: 'Admin'
+                    };
+
                     const filteredUsers = responseData.searchedUser.filter(user => {
+                        
+                        let roleTypeWord = roleTypeMap[user.role_id] || '';
+
                         return (
                             String(user.user_id).includes(searchValue) ||
                             user.username.toLowerCase().includes(searchValue.toLowerCase()) ||
                             user.first_name.toLowerCase().includes(searchValue.toLowerCase()) ||
                             user.last_name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                            user.email.toLowerCase().includes(searchValue.toLowerCase())
+                            user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            roleTypeWord.toLowerCase().includes(searchValue.toLowerCase())
                         );
                     });
 

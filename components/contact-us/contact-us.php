@@ -83,67 +83,74 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html> 
-<body>
-    <div class="contact-section" align="center">
-        <h1 class="contact-emergency">CONTACT INFORMATION</h1>
-        <div class="centered-image" align="center">
-            <h2 class="title">Barangay Sta. Cruz</h2>
+<div class="contact-section">
+        <h1 class="contact-header">CONTACT US</h1>
+        <h1 class="contact-emergency">EMERGENCY HOTLINES</h1>
+        <div class="emergency-content">
+            <h1></h1>
         </div>
 
-        <br>
+      <hr style="height: 5px; border: 5px; background-color: #000;">
+      <br>
 
-        <hr style="height: 5px; border: 5px; background-color: #000;">
-        <br>
-
-        <div class="contact-information-section" align="center">
-            <h1 class="contact-information-header">CONTACT INFORMATION</h1>
-        </div>
-
-        <div class="contact-rectangle">
-        <form method="POST" action="">
-            <div class="contact-section" align="center">
-                <div class="left-section">
-                    <div class="info">
-                        <h3>Name<span class="required-asterisk">*</span></h3>        
-                        <span class="icon"><img src="./assets/images/pages/homepage/account.png"></span>
-                        <input type="text" name="name" placeholder="Name" required>
-                    </div>
-
-                    <div class="info">
-                        <h3>Email<span class="required-asterisk">*</span></h3>
-                        <span class="icon2"><img src="./assets/images/pages/homepage/email2.png"></span>
-                        <input type="email" name="email" placeholder="Email" required>
-                    </div>
-
-                    <div class="info">
-                        <h3>Address<span class="required-asterisk">*</span></h3>
-                        <span class="icon"><img src="./assets/images/pages/homepage/home.png" ></span>
-                        <input type="text" name="address" placeholder="Residential Address" required>
-                    </div>
-                </div>
-
-                <div class="right-section">
-                    <div class="info">
-                        <h3>Phone Number</h3>
-                        <span class="icon"><img src="./assets/images/pages/homepage/phone-call.png"></span>
-                        <input type="tel" name="phone" placeholder="+63-xxx-xxx-xxxx">
-                    </div>
-
-
-                    <div class="info">
-                        <h3>Message</h3>
-                        <textarea name="message" placeholder="Type your message here..." required></textarea>
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </div>
-                </div>
-
-                <div style="clear: both;"></div>
-            </div>
-        </form>
+      <div class="contact-information-section">
+        <h1 class="contact-information-header">FEEDBACK FORM</h1>
     </div>
 
-</html>
+  <div class="contact-rectangle">
+    <div class="left-section">
+      <div class="info">
+        <h3>Name<span class="required-asterisk">*</span></h3>        
+        <span class="icon"><img src="./assets/images/pages/homepage/account.png"></span>
+        <input type="text" placeholder="Name" required>
+      </div>
+
+      <div class="info">
+        <h3>Email<span class="required-asterisk">*</span></h3>
+        <span class="icon2"><img src="./assets/images/pages/homepage/email2.png"></span>
+        <input type="email" placeholder="   Email" required>
+      </div>
+
+      <div class="info">
+        <h3>Address<span class="required-asterisk">*</span></h3>
+        <span class="icon"><img src="./assets/images/pages/homepage/home.png" ></span>
+        <input type="text" placeholder="Residential Address" required>
+      </div>
+      <div class="info">
+        <h3>Phone Number</h3>
+        <span class="icon"><img src="./assets/images/pages/homepage/phone-call.png"></span>
+        <input type="tel" placeholder="+63-xxx-xxx-xxxx">
+        </div>  
+
+    </div>
+
+    <div class="right-section">
+    <div class="info">
+                        <h3>Subject<span class="required-asterisk">*</span></h3>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+
+                    <div class="info">
+                        <h3>Priority</h3>
+                        <select name="priority_id">
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                            <option value="4">Urgent</option>
+                        </select>
+                    </div>
+
+      <div class="info">
+        <h3>Message</h3>
+        <textarea placeholder="Type your message here..."></textarea>
+      </div>
+    </div>
+    <div class="sub">
+    <a href="#" class="submit-button">SUBMIT</a>
+    </div>
+    <div style="clear: both;"></div>
+    
+  </div>
+  <br>
+        <br>
+</div>

@@ -45,7 +45,33 @@ body {
     font-size: 20px;
     font-family: 'Grandis Bold';
   }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
   
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0f52BA;
+    border-radius: 5px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
   .navigation-links {
     margin-left: 400px;
   }
@@ -60,6 +86,7 @@ body {
   
   .navigation-links a:hover {
     text-decoration: underline;
+    color: white;
   
   }
 
@@ -162,3 +189,23 @@ body {
     margin-right: 10px;
   }
   
+  .dropbtn {
+    font-family: 'Grandis Bold';
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    border: none;
+  }  
+  
+  .dropdown-content a:hover {
+    background-color: transparent;
+    color: white;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color:transparent;
+  }

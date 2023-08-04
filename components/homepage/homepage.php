@@ -105,7 +105,7 @@
 
 <div class="content-container">
     <p class="corner-text">THE BARANGAY OFFICE'S CORNER</p>
-    <a href="barangaycorner.html"><button class="corner-button">GO TO BARANGAY OFFICE'S CORNER</button></a>
+    <a href="barangay"><button class="corner-button">GO TO BARANGAY OFFICE'S CORNER</button></a>
 </div>
 </div>
 

@@ -13,9 +13,19 @@
     $_SESSION['current_page'] = "barangay-corner";
 ?>
 
-<div>
-    This is the barangay corner!
+<div class="content" align="center">
+
+            <div class="PB">
+            <h1>BARANGAY OFFICE'S CORNER</h1>
+                <img src="./assets/images/pages/homepage/self.png" alt="photo1" height="200px" align="center">
+            </div> 
+
+            <div class="PB2">
+            <h1>LEGISLATIVE BRANCH</h1>
+                <img src="./assets/images/pages/homepage/self.png" alt="photo1" height="200px" align="left">
+            </div>
 </div>
+
 
 <?php 
     //Imports Javascript

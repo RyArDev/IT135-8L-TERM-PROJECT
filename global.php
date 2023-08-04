@@ -44,8 +44,13 @@
         <?php
                        if(isset($_SESSION['user_id'])){
 
-                        echo "<li><a href='/profile'>" . $user['username'] . "</a></li>" .
-                        "<li><a href='utilities/authentication/logout.php'>Logout</a></li>";
+                        echo "<div class='dropdown'>
+                                <button class='dropbtn'>".  $user['username'] ."</button>
+                                  <div class='dropdown-content'>
+                                    <a href='/profile'>My Profile</a>
+                                    <a href='utilities/authentication/logout.php'>Logout</a>
+                                  </div>
+                              </div>";  
 
                     }else{
 

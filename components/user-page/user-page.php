@@ -330,24 +330,27 @@
     }
 
 ?>
+<br>
 
-<div id="userProfile">
-    <?php echo "<img src='". $userProfile['banner_image_url'] . "' width='970px' height='250px'/>" ?><br/>
-    <?php echo "<img src='". $userProfile['profile_image_url'] . "' width='200px' height='200px'/>" ?>
-    Hello <?php echo $user['username'] ?><br>
-    <?php echo htmlspecialchars_decode($userProfile['description']); ?><br/><br/>
-    <?php echo htmlspecialchars_decode($userProfile['job_description']); ?><br/><br/>
-    <button onclick="toggleForm('editUserForm')">Edit Profile</button>
-    <button onclick="toggleForm('changePasswordForm')">Change Password</button>
+<div id="userProfile" align="center" class="profile">
+    <div class="ban"><?php echo "<img src='". $userProfile['banner_image_url'] . "' width='790px' height='255px'/>" ?><br/></div>
+    <div class="prof"><?php echo "<img src='". $userProfile['profile_image_url'] . "' width='200px' height='200px'/>" ?><br></div>
+     <div class="nameused">@<?php echo $user['username'] ?><br><br></div>
+    <div class="desc">BIO:<?php echo htmlspecialchars_decode($userProfile['description']); ?><br></div>
+    <div class="job">JOB DESCRIPTION:<?php echo htmlspecialchars_decode($userProfile['job_description']); ?><br></div>
+    <div class="bts">
+    <button onclick="toggleForm('editUserForm')" class="edit">Edit Profile</button>
+    <button onclick="toggleForm('changePasswordForm')" class="change">Change Password</button>
+    </div>
 </div>
+</br>
 
-<div class="hidden-form" id="editUserForm">
-    <button onclick="toggleForm('editUserForm')">Close</button>
-    <h2>Edit Profile Form</h2>
+<div class="hidden-form1" id="editUserForm" align="center">
+    <h2>Edit Profile Form</h2></br>
     <form method="POST" enctype="multipart/form-data">
         <label for="profileImage">Add Profile Picture (Max 2MB):</label>
         <img src="#" id="previewProfileImage" alt="Preview Profile Image" style="max-width: 200px; max-height: 200px; display: none;">
-        <input type="file" name="profileImage" id="profileImage" accept="image/*"><br><br>
+        <input type="file" name="profileImage" id="profileImage" accept="image/*"><br>
 
         <label for="profileBanner">Add Profile Banner (Max 5MB):</label>
         <img src="#" id="previewProfileBanner" alt="Preview Profile Banner" style="max-width: 970px; max-height: 250px; display: none;">
@@ -356,70 +359,100 @@
         <label for="userDescription">User Bio:</label>
         <textarea id="userDescription" name="userDescription" placeholder="User Description"><?php echo $userProfile['description']; ?></textarea><br><br>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="<?php echo $user['username']; ?>" placeholder="Username" required><br><br>
-        
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" value="<?php echo $userProfile['first_name']; ?>" placeholder="First Name" required><br><br>
-        
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" value="<?php echo $userProfile['last_name']; ?>" placeholder="Last Name" required><br><br>
-        
-        <label for="email">Email:</label>
+
+        <div class="edituser" align="left">
+        <label for="username">Username:</label></br>
+        <input class="boxuser" type="text" id="username" name="username" value="<?php echo $user['username']; ?>" placeholder="Username" required><br><br>
+        </div>
+
+        <div class="editemail" align="left">
+        <label for="email">Email:</label></br>
         <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" placeholder="Email" required><br><br>
-        
-        <label for="birthDate">Birth Date:</label>
+        </div>
+
+        <div class="editfirst" align="left">
+        <label for="firstName">First Name:</label></br>
+        <input type="text" id="firstName" name="firstName" value="<?php echo $userProfile['first_name']; ?>" placeholder="First Name" required><br><br>
+        </div>
+
+        <div class="editlast" align="left">
+        <label for="lastName">Last Name:</label></br>
+        <input type="text" id="lastName" name="lastName" value="<?php echo $userProfile['last_name']; ?>" placeholder="Last Name" required><br><br>
+        </div>
+
+        <div class="editbirth" align="left">
+        <label for="birthDate">Birth Date:</label></br>
         <input type="date" id="birthDate" name="birthDate" value="<?php echo $userProfile['birth_date']; ?>" placeholder="Birth Date" required><br><br>
-        
-        <label for="address1">Address:</label>
+        </div>
+
+        <div class="editadd" align="left">
+        <label for="address1">Address:</label></br>
         <input type="text" id="address1" name="address1" placeholder="Address Line 1" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[0] : null; ?>" required><br>
         <input type="text" id="address2" name="address2" placeholder="Address Line 2" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[1] : null; ?>"><br><br>
+        </div>
         
-        <label for="city">City:</label>
+        <div class="editcity" align="left">
+        <label for="city">City:</label></br>
         <input type="text" id="city" name="city" placeholder="City" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[2] : null; ?>" required><br><br>
-        
-        <label for="stateProvince">State/Province:</label>
+        </div>
+
+        <div class="editstate" align="left">
+        <label for="stateProvince">State/Province:</label></br>
         <input type="text" id="stateProvince" name="stateProvince" placeholder="State / Province" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[3] : null; ?>" required><br><br>
+        </div>
 
-        <label for="zipCode">Zip Code:</label>
+        <div class="editzip" align="left">
+        <label for="zipCode">Zip Code:</label></br>
         <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value="<?php echo isset($userProfile['address']) ? explode(', ', $userProfile['address'], 5)[4] : null; ?>" required><br><br>
+        </div>
 
-        <label for="gender">Gender:</label>
+        <div class="editgender" align="left">
+        <label for="gender">Gender:</label></br>
         <select name="gender" id="gender" required>
             <option value="Male" <?php echo $userProfile['gender'] === 'Male' ? ' selected' : ''; ?>>Male</option>
             <option value="Female" <?php echo $userProfile['gender'] === 'Female' ? ' selected' : ''; ?>>Female</option>
             <option value="Other" <?php echo $userProfile['gender'] === 'Other' ? ' selected' : ''; ?>>Other</option>
         </select><br><br>
+        </div>
         
-        <label for="phoneNumber">Phone Number:</label>
+        <div class="editnum" align="left">
+        <label for="phoneNumber">Phone Number:</label></br>
         <input type="text" id="phoneNumber" name="phoneNumber" value="<?php echo $userProfile['phone_number']; ?>" placeholder="Phone Number"><br><br>
-
-        <label for="jobTitle">Job Title:</label>
+        </div>
+        
+        <div class="edittitle" align="left">
+        <label for="jobTitle" align="left">Job Title:</label></br>
         <input type="text" id="jobTitle" name="jobTitle" value="<?php echo $userProfile['job_title']; ?>" placeholder="Job Title"><br><br>
-        
-        <label for="jobDescription">Job Description:</label>
+        </div>
+
+        <div class="editdesc">
+        <label for="jobDescription" align="left">Job Description:</label></br>
         <textarea id="jobDescription" name="jobDescription" placeholder="Job Description"><?php echo $userProfile['job_description']; ?></textarea><br><br>
-        
-        <input type="submit" name="editUserForm" value="Submit">
+        </div>
+
+        <input type="submit" name="editUserForm" value="Submit" class="editsub">
     </form>
 </div>
+</br>
 
-<div class="hidden-form" id="changePasswordForm">
-    <button onclick="toggleForm('changePasswordForm')">Close</button>
-    <h2>Change Password</h2>
+
+
+<div class="hidden-form2" id="changePasswordForm" align="center">
+    <h2 class="cp">Change Password</h2>
     <form method="POST">
-        <label for="oldPassword">Old Password:</label>
+        <label for="oldPassword">Old Password:</label></br>
         <input type="password" id="oldPassword" name="oldPassword" placeholder="Old Password" required><br><br>
 
-        <label for="newPassword">New Password:</label>
+        <label for="newPassword">New Password:</label></br>
         <input type="password" id="newPassword" name="newPassword" placeholder="New Password" required><br><br>
         
-        <label for="confirmNewPassword">Confirm New Password:</label>
+        <label for="confirmNewPassword">Confirm New Password:</label></br>
         <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" required><br><br>
         
-        <input type="submit" name="changePasswordForm" value="Submit">
+        <input type="submit" name="changePasswordForm" value="Submit" class="subpass">
     </form>
 </div>
+<br>
 
 <?php 
     //Imports Javascript

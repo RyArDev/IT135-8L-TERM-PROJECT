@@ -14,9 +14,9 @@
 
     // Array of forms and their corresponding PDF filenames
     $forms = array(
-        "Form 1" => "Form1.pdf",
-        "Form 2" => "Form2.pdf",
-        "Form 3" => "Form3.pdf"
+        "Solo Parent" => "Solo Parent.pdf",
+        "PWD" => "PWD.pdf",
+        "Philsys" => "Philsys.pdf"
         // Add more forms here as needed
     );
 ?>
@@ -62,7 +62,7 @@
     <ul>
         <?php foreach ($forms as $formName => $pdfFilename): ?>
             <li>
-                <a class="download-link" href="./assets/files/pages/services/pdfs/<?php echo $pdfFilename; ?>" download="<?php echo $pdfFilename; ?>">
+                <a class="download-link" href="/assets/files/pages/services/pdfs/<?php echo $pdfFilename; ?>" download="<?php echo $pdfFilename; ?>">
                     <?php echo $formName; ?>
                 </a>
             </li>
@@ -90,16 +90,6 @@
         <p>xxxx-xxx-xxxx</p>
         </div>
     <br>
-</div>
-
-<div class="content-buttom2" align="center">
-    <br><br><br><br><br>
-    <div class="content-buttom2-1">
-    <h1>DOWNLOADABLE FORMS</h1>
-    <h1>ONLINE BARANGAY ID SERVED</h1>
-    <h1>ONLINE BUSINESS PERMIT SERVED</h1>
-    <h1>NEW CLEARANCES</h1>
-  </div>
 </div>
 
 

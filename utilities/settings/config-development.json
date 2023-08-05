@@ -39,7 +39,8 @@
         "login":"components/login/login.php",
         "register":"components/register/register.php",
         "services":"components/services/services.php",
-        "profile":"components/user-page/user-page.php"
+        "profile":"components/user-page/user-page.php",
+        "event":"components/events/event.php"
     },
     "CSS_LIST":{
         "homepage":"components/homepage/homepage.css",

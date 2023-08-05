@@ -37,7 +37,7 @@
         <a href="services">Services</a>
         <a href="announcement">Announcements</a>
         <a href="history">History</a>
-        <a href="forums">Forum</a>
+        <a href="forum">Forum</a>
         <a href="contact-us">Contact Us</a>
         <!--<a href="logout">Logout</a>-->
 
@@ -48,6 +48,7 @@
                                 <button class='dropbtn'>".  $user['username'] ."</button>
                                   <div class='dropdown-content'>
                                     <a href='/profile'>My Profile</a>
+                                    <a href='/admin'>Dashboard</a>
                                     <a href='utilities/authentication/logout.php'>Logout</a>
                                   </div>
                               </div>";  

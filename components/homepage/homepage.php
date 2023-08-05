@@ -55,7 +55,7 @@
       <!-- avatar icon  -->
     </div>
     <h1>Barangay Events</h1>
-    <a href="#"><button class="learn-more-btn">Learn More</button></a>
+    <a href="/event"><button class="learn-more-btn">Learn More</button></a>
   </div>
 
   <!-- Third card -->

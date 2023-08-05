@@ -144,6 +144,18 @@
   height: 200px;
   border-radius: 50px;
   padding: 50px;
+  list-style-type: disc; /* Show bullet points */
+  text-align: center; /* Center the text within the list items */ 
+}
+
+.df ul {
+  list-style-type: disc; /* Show bullet points */
+  padding: 0; /* Remove the default padding of the <ul> element */
+  text-align: center; /* Center the text within the list items */
+}
+
+.df li {
+  margin-bottom: 10px; /* Add some space between each list item */
 }
 
 .dftxt{
@@ -175,21 +187,21 @@
 }
 
 .content-buttom{
-  background-color: #0f52BA;
+  background-color: #fdfdfd;
   font-family: 'Grandis Bold';
   font-size: 20px !important;
 }
 
 .NA{
-  color:#fff;
+  color:#000000;
 }
 
 .CU{
-  color: #fff;
+  color: #000000;
 }
 
 .contact-us{
-  color: #fff;
+  color: #000000;
 }
 
 .content-buttom2{

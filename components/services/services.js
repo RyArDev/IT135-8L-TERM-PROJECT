@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const filename = this.getAttribute('data-filename');
 
             // Update the PDF file URL with the correct path
-            const pdfUrl = '/assets/pdfs/' + filename;
+            const pdfUrl = '/assets/files/pages/services/pdfs/' + filename;
 
             // Create an anchor element and trigger the download
             const anchor = document.createElement('a');

@@ -1,10 +1,4 @@
-  /* Responsive styling */
-  @media screen and (max-width: 768px) {
-    form {
-        width: 100%;
-    }
-  }
-  
+
 .contact-header {
   font-family: 'Roboto Bold';
 
@@ -18,9 +12,9 @@
 
 .emergency-content{
   width: 1200px; 
-  height: 100px; 
-  
- 
+  height: 400px; 
+  background-color: #ffffff;
+  border: solid black;
   padding: 20px; 
   border-radius: 40px;
   margin-left: 145px;
@@ -33,7 +27,7 @@
   text-align: center;
 }
 
-.emergency-content {
+.centered-image {
 display: flex;
 justify-content: center; 
 align-items: center; 
@@ -45,7 +39,7 @@ margin-bottom:-400px;
 margin-left: 100px;
 }
 
-.emergency-content img {
+.centered-image img {
 position: absolute;
 width: 70%;
 height: 50%;

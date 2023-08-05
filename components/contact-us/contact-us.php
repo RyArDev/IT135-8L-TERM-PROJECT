@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1 class="contact-header">CONTACT US</h1>
         <h1 class="contact-emergency">EMERGENCY HOTLINES</h1>
         <div class="emergency-content">
-        <img src="assets/images/pages/contact-us/hotlines.png" alt="Image">
+          <h1> PENDING! </h1>
         </div>
 
       <hr style="height: 5px; border: 5px; background-color: #000;">
@@ -126,11 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="right-section">
     <div class="info">
-                        <h3>Subject<span class="required-asterisk">*</span></h3>
-                        <input type="text" name="subject" placeholder="Subject" required>
-                    </div>
 
-                    <div class="info">
                         <h3>Priority</h3>
                         <select name="priority_id">
                             <option value="1">Low</option>
@@ -138,6 +134,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <option value="3">High</option>
                             <option value="4">Urgent</option>
                         </select>
+                   
+                        <h3>Subject<span class="required-asterisk">*</span></h3>
+                        <input type="text" name="subject" placeholder="Subject" required>
                     </div>
 
       <div class="info">

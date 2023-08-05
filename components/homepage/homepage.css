@@ -1,0 +1,415 @@
+
+@font-face {
+  font-family: 'Grandis Regular';
+  src: url('fonts/Grandis Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Grandis Bold';
+  src: url('fonts/Grandis Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Roboto Bold';
+  src: url('Roboto/Roboto-Bold.ttf') format('opentype');
+}
+
+/* Hero  */
+.hero-gallery {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+  }
+  
+  .slider {
+    display: flex;
+    width: 400%;
+    /* 4 images, each takes 25% width (sample lang to) */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .slider img {
+    width: 100%;
+    height: 600px;
+  }
+  
+  
+  
+  /* Navigation Dots */
+  .dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .dot.active {
+    background-color: #0f52BA;
+  }
+  
+  .hero-overlay2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+  
+    opacity: 1;
+  }
+  
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  .hero-heading {
+    font-size: 50px !important;
+    margin-bottom: 20px;
+    font-family: 'Roboto Bold';
+    color: black;
+  }
+  
+  .hero-paragraph {
+    margin: 30px;
+    font-size: 15px;
+    font-family: 'Grandis Regular';
+  
+  }
+  
+  .small-header {
+    background-color: white;
+    text-align: left;
+    padding: 5px;
+    font-family: 'Grandis Bold';
+  }
+  
+  .avatar-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    vertical-align: middle;
+    float: right;
+  }
+  
+  /* Styling for the card container */
+  .card-container {
+    margin: 25px 0;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  /* Styling for each card */
+  .card {
+    flex: 1;
+    width: 600px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: #f0f0f0ba;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 100px;
+  }
+  
+  /* Styling for the avatar icon */
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 auto 15px;
+  
+  }
+  
+  /* Styling for the h1 text */
+  h1 {
+    margin-bottom: 50px;
+    margin-top: 10px;
+    color: white;
+    font-size: 25px !important;
+    font-family: 'Roboto Bold'
+  }
+  
+  /* Styling for the Learn More button */
+  .learn-more-btn {
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 15px;
+    font-family: 'Grandis Regular';
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .learn-more-btn hover {
+    color: black;
+  }
+  
+  .barangay-services {
+    background-color: #0f52BA;
+    margin-bottom: 20px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Roboto Bold';
+    word-wrap: break-word;
+  }
+  
+  /* Styling for the carousel frame */
+  .carousel-frame {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Styling for the card container */
+  .card-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Styling for each card */
+  .card {
+    flex: 1 0 600px;
+    max-width: 400px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: #e6e6e6;
+    border: solid 2px;
+    border-color: #000;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/lost-and-found.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .avatar1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/calendar.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .avatar2 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/job-seeker.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .avatar3 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/lost-and-found.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .avatar4 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/lost-and-found.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .avatar5 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto 15px;
+    background-image: url("/assets/images/pages/homepage/lost-and-found.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  h1 {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    color: white;
+    font-size: 25px;
+    font-family: 'Roboto Bold';
+  }
+  
+  .learn-more-btn {
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-top: -50px;
+    font-size: 15px;
+    font-family: 'Grandis Regular';
+    background-color: #fff;
+    border: solid 2px black;
+    cursor: pointer;
+  }
+  
+  .arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    padding: 10px 12.5px;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    color: #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    opacity: 0.5;
+  }
+  
+  
+  .left-arrow {
+    left: 0;
+    margin-left: 30px;
+    top: 120px;
+    transform: translateX(-50%);
+  }
+  
+  .right-arrow {
+    right: 0;
+    margin-right: 40px;
+    top: 120px;
+  
+    transform: translateX(50%);
+  }
+  
+  .main-container {
+    background-color: #0f52BA;
+    border: solid 10px black;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    background-image:  radial-gradient(#ffffff 0.5px, transparent 0.5px), radial-gradient(#ffffff 0.5px, #0f52BA 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0,10px 10px;
+  }
+  
+  .image-container{
+    flex: 0 0 60%;
+    padding-right: 20px;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    margin-bottom: -5px;
+    margin-left: 200px;
+  }
+  
+  .content-container {
+    flex: 1;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .corner-text {
+    color: white;
+    font-size: 40px;
+    margin-right: 200px;
+    font-family: 'Roboto Bold';
+  }
+  
+  .corner-button {
+    background-color: white;
+    color: black;
+    font-family: 'Grandis Regular';
+    border-radius: 40px;
+    padding: 10px 20px;
+    margin-right: 200px;
+    margin-top: 1px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style for featured */
+  a {
+    text-decoration: underline;
+    color: rgb(31, 31, 31);
+  }
+  
+  .links {
+    margin-bottom: 50px;
+    margin-left: 20;
+    height: 30;
+  }
+  
+  .links a{
+    color: white;
+  }
+  
+  .content {
+    min-height: 100vh;
+    padding-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rounded-button {
+    display: inline-block;
+    padding: 20px 55px;
+    background-color: #0f52BA;
+    color: white;
+    font-size: 20;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.2s ease;
+  }
+  

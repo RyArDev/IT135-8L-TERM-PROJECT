@@ -310,7 +310,107 @@
     }
 
 ?>
-
+<style>
+/* Common styles for hidden forms */
+.hidden-form {
+    display: none;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+  
+  .hidden-form h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .hidden-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .hidden-form input[type="text"],
+  .hidden-form textarea,
+  .hidden-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  
+  .hidden-form input[type="submit"],
+  .hidden-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    float: right;
+  }
+  
+  .hidden-form button {
+    background-color: #ccc;
+    margin-right: 10px;
+  }
+  
+  .hidden-form input[type="submit"]:hover,
+  .hidden-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Forum Page */
+  #forum a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  #forum h1 {
+    margin-top: 0;
+    font-size: 2em;
+  }
+  
+  #forum #addForumTypeButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  #forum #addForumTypeButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Forum Topic */
+  #forumTopic {
+    display: none;
+    margin-top: 20px;
+  }
+  
+  /* Forum Post */
+  #forumPost {
+    display: none;
+    margin-top: 20px;
+  }
+  
+</style>
 <div id="addForumTypeForm" class="hidden-form">
     <h2>Add a Topic</h2>
     <form method="POST">

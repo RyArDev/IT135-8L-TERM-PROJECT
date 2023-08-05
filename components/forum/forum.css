@@ -1,7 +1,92 @@
+/* CSS for the hidden forms and other elements */
+
+/* Form container */
 .hidden-form {
     display: none;
-}
-
-.hidden-div{
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Form header */
+  .hidden-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  
+  /* Form labels */
+  .hidden-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Form inputs and textareas */
+  .hidden-form input[type="text"],
+  .hidden-form input[type="hidden"],
+  .hidden-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Form buttons */
+  .hidden-form input[type="submit"],
+  .hidden-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* Container for forum content */
+  #forum {
+    padding: 20px;
+  }
+  
+  /* Forum header */
+  #forum h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  /* Forum button */
+  #addForumTypeButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  /* Forum topic links */
+  #forum a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  /* Hidden forum content */
+  .hidden-div {
     display: none;
-}
+    width: 100%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  

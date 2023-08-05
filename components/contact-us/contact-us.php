@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1 class="contact-header">CONTACT US</h1>
         <h1 class="contact-emergency">EMERGENCY HOTLINES</h1>
         <div class="emergency-content">
-            <h1></h1>
+        <img src="assets/images/pages/contact-us/hotlines.png" alt="Image">
         </div>
 
       <hr style="height: 5px; border: 5px; background-color: #000;">

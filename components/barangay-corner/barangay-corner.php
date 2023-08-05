@@ -5,129 +5,126 @@
 
 <style>
 
-.content{
-        background-color: rgb(255, 255, 255);
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
 }
 
-h1{
-    color:rgb(2, 2, 2);
-    margin-top: -10px;
-    font-family: 'Grandis Bold';
-    margin-right: 20px;
+h1 {
+    margin: 20px;
+    font-size: 40px;
+    text-align: center;
 }
 
-.content h1{
-  text-align: center;
-  margin-left: 70px;
+.profile-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    width: 200px; /* Adjust the width as per your preference */
+    height: 250px; /* Adjust the height as per your preference */
 }
 
-.content .PB{
-  margin-left: 100px;
-  margin-top: 30px;
+.profile-card img {
+    max-width: 100px;
+    border-radius: 30%;
+    margin-bottom: 10px;
 }
 
-.content2 h1{
-    text-align: left;
-    margin-left:40px;
+/* Specific styles for each branch */
+.punong-barangay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.content .PB2{
-  margin-left: -1400px;
-  margin-top: 30px;
+.legislative-branch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.content .PB3{
-  margin-left: -500px;
-  margin-top: -350px;
+.executive-branch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.content .PB4{
-  margin-left: 400px;
-  margin-top: -350px;
-}
-
-.content .PB5{
-  margin-left: 1300px;
-  margin-top: -350px;
-}
-
-.content3 h1{
-  text-align: right;
-  margin-right:80px;
-}
-
-.content .PB6{
-  margin-left: -1400px;
-  margin-top: 30px;
-}
-
-.content .PB7{
-  margin-left: -500px;
-  margin-top: -350px;
-}
-
-.content .PB8{
-  margin-left: 400px;
-  margin-top: -350px;
-}
-
-.content .PB9{
-    margin-left: 1300px;
-    margin-top: -350px;
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .profile-card {
+        width: 150px; /* Distribute cards in 2 columns with equal width */
+        margin: 10px;
+    }
 }
 
     
 </style>
 
 <body>
+    <h1>Barangay Office Corner</h1>
+    <div class="punong-barangay">
+        <div class="profile-card punong-barangay">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Punong Barangay">
+            <h3>Punong Barangay</h3>
+            <p>Name: Juan Dela Cruz</p>
+        </div>
+    </div>
+   
 
-    <div class="content" align="center">
-        <br><br><br>
-        <h1>BARANGAY OFFICE'S CORNER</h1>
-            <div class="PB">
-                <img src="./brgycorner/self.png" alt="photo1" height="350px" align="center">
-            </div>
+    <h1>Legislative Branch</h1>
+    <div class="legislative-branch">
+        <div class="profile-card legislative-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Legislator 1">
+            <h3>Legislator 1</h3>
+            <p>Name: Maria Santos</p>
+        </div>
+        <!-- Repeat similar structure for other legislative members -->
+        <div class="profile-card legislative-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Legislator 1">
+            <h3>Legislator 1</h3>
+            <p>Name: Maria Santos</p>
+        </div>
+        <div class="profile-card legislative-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Legislator 1">
+            <h3>Legislator 1</h3>
+            <p>Name: Maria Santos</p>
+        </div>
+        <div class="profile-card legislative-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Legislator 1">
+            <h3>Legislator 1</h3>
+            <p>Name: Maria Santos</p>
+        </div>
+    </div>
 
-            <br><br><br><br>
-    <div class="content2">   
-        <h1>LEGISLATIVE BRANCH</h1>
-            <div class="PB2">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB3">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB4">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB5">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-    </div>   
-
-<br><br><br><br>
-
-    <div class="content3">   
-        <h1>EXECUTIVE BRANCH</h1>
-            <div class="PB6">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB7">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB8">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-
-            <div class="PB9">
-                <img src="./brgycorner/self2.png" alt="photo1" height="350px">
-            </div>  
-    </div> 
-
+    <h1>Executive Branch</h1>
+    <div class="executive-branch">
+        <div class="profile-card executive-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Executive 1">
+            <h3>Executive 1</h3>
+            <p>Name: Jose Gonzales</p>
+        </div>
+        <!-- Repeat similar structure for other executive members -->
+        <div class="profile-card executive-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Executive 1">
+            <h3>Executive 1</h3>
+            <p>Name: Jose Gonzales</p>
+        </div>
+        <div class="profile-card executive-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Executive 1">
+            <h3>Executive 1</h3>
+            <p>Name: Jose Gonzales</p>
+        </div>
+        <div class="profile-card executive-member">
+            <img src="assets/images/pages/barangay-corner/brngy.png" alt="Executive 1">
+            <h3>Executive 1</h3>
+            <p>Name: Jose Gonzales</p>
+        </div>
+    </div>
 </body>
 </html>

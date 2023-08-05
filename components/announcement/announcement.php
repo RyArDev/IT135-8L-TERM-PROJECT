@@ -242,7 +242,132 @@
     }
 
 ?>
+<style>
+    /* CSS for the Announcement Page, Add and Edit Announcement Forms */
 
+/* Container for the Announcement Page */
+#announcement-page {
+    padding: 20px;
+  }
+  
+  /* Announcement header */
+  #announcement-page h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  /* Add Announcement button */
+  #addAnnouncementButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  /* Add and Edit Announcement Form container */
+  .hidden-form {
+    display: none;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Form header */
+  .hidden-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  
+  /* Form labels */
+  .hidden-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Form input, select, and textarea */
+  .hidden-form input[type="text"],
+  .hidden-form input[type="hidden"],
+  .hidden-form select,
+  .hidden-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Form buttons */
+  .hidden-form input[type="submit"],
+  .hidden-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  /* CSS for the Announcement List */
+#announcementList {
+    margin-top: 20px;
+  }
+  
+  /* Style the table */
+  #announcementList table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+  }
+  
+  /* Style table header cells */
+  #announcementList th {
+    background-color: #f0f0f0;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  /* Style table data cells */
+  #announcementList td {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  /* Style the "Edit Announcement" button */
+  .editAnnouncementButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  /* Style the "Delete Announcement" button */
+  #announcementList form {
+    display: inline-block;
+  }
+  
+  #announcementList button[type="submit"] {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+</style>
 <div>
     <h1>Announcement Page</h1>
     <?php if(isset($user['role_id'])) echo $user['role_id'] > 2 ? '<button id="addAnnouncementButton" onclick="toggleForm(\'addAnnouncementForm\')">Add Announcement</button>' : null; ?>

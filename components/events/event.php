@@ -3,167 +3,97 @@
 </head>
 
 <style>
-    body{
-    background-color: rgb(53, 126, 236); 
+    /* Basic styling for the whole page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
 }
 
-@font-face {
-    font-family: 'Grandis Regular';
-    src: url('fonts/Grandis Regular.otf') format('opentype');
+/* Styling for the main body */
+.main-body {
+    text-align: center;
+    padding: 20px;
 }
 
-  @font-face {
-  font-family: 'Grandis Bold';
-  src: url('fonts/Grandis Medium.otf') format('opentype');
-}
-  
-  @font-face {
-    font-family: 'Roboto Bold';
-    src: url('Roboto/Roboto-Bold.ttf') format('opentype');
+/* Styling for the event body */
+.event-body {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
-.event-body{
-    background-color: white;
+/* Styling for the event title */
+.event-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Styling for event boxes */
+.event-box1,
+.event-box2,
+.event-box3 {
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-    height: 500px;
-    margin-left: 1px;
-    margin-top: 20px;
-    width:97%;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.event-title{
-    color: rgb(0, 0, 0);
-    font-family: 'Roboto Bold';
-    font-size: 40px !important;
-    margin-top: 30px;
+/* Styling for event box headings */
+.ebox1,
+.ebox2,
+.ebox3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.event-box1{
-    background-color:  rgb(53, 126, 236);
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    .event-body {
+        padding: 0 10px;
+    }
+}
+
+.event1,
+.event2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Styling for event images */
+.ev1,
+.ev2,
+.ev3,
+.ev4,
+.ev5,
+.ev6 {
+    display: block;
+    max-width: 50%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-    height: 250px;
-    width: 30%;
-    margin-top: 100px;
-    margin-left: -1200px;
+    margin-bottom: 20px;
 }
 
-.ebox1{
-    font-family: sans-serif;
-    margin-top: 25px;
-    margin-left: 1px;
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    .ev1,
+    .ev2,
+    .ev3,
+    .ev4,
+    .ev5,
+    .ev6 {
+        width: 100%;
+        height: auto;
+    }
 }
-
-.event-box1 p{
-    margin: auto;
-}
-
-.event-box2{
-    background-color:  rgb(53, 126, 236);
-    border-radius: 5px;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-    height: 250px;
-    width: 30%;
-    margin-top: -250px;
-    margin-left: 5px;
-}
-
-.ebox2{
-    font-family: sans-serif;
-    margin-top: 25px;
-    margin-left: 1px;
-}
-
-.event-box2 p{
-    margin: auto;
-}
-
-.event-box3{
-    background-color:  rgb(53, 126, 236);
-    border-radius: 5px;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-    height: 250px;
-    width: 30%;
-    margin-top: -250px;
-    margin-left: 1200px;
-}
-
-.ebox3{
-    font-family: sans-serif;
-    margin-top: 25px;
-    margin-left: 1px;
-}
-
-.event-box3 p{
-    margin: auto;
-}
-
-
-.main-event{
-    background-color: white;
-    border-radius: 5px;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-    height: 1800px;
-    margin-left: 1px;
-    margin-top: 20px;
-    width:97%;
-}
-
-.event1{
-    color: rgb(0, 0, 0);
-    font-family: 'Roboto Bold'
-}
-
-.ev1 {
-    margin-left: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-}
-
-.ev2{
-    margin-right: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-}
-
-.event2{
-    color: rgb(0, 0, 0);
-    font-family: 'Roboto Bold';
-    margin-top: 600px;
-}
-
-.ev3 {
-    margin-left: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-}
-
-.ev4{
-    margin-right: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-}
-
-.ev5 {
-    margin-left: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-    margin-top: 50px;
-}
-
-.ev6{
-    margin-right: 50px;
-    border: solid 2px black;
-    border-radius: 5px;
-    margin-top: 50px;
-}
-</style>
+    </style>
 
 
 <div class="main-body" align="center">
@@ -205,14 +135,14 @@
 
         <div class="main-event" align="center">
             <h1 class="event1">18-Day Campaign to End Violence Against Women</h1>
-            <img src="./assets/images/pages/event/ev1.jpg" align="left" height="500px" width="800px" class="ev1">
-            <img src="./assets/images/pages/event/ev2.jpg" align="right" height="500px" width="800px" class="ev2">
+            <img src="./assets/images/pages/event/ev1.jpg"  class="ev1">
+            <img src="./assets/images/pages/event/ev2.jpg"  class="ev2">
 
             <h1 class="event2">STO. NINO</h1>
-            <img src="./assets/images/pages/event/ev3.jpg" align="left" height="500px" width="800px" class="ev3">
-            <img src="./assets/images/pages/event/ev4.jpg" align="right" height="500px" width="800px" class="ev4">
-            <img src="./assets/images/pages/event/ev5.jpg" align="left" height="500px" width="800px" class="ev5">
-            <img src="./assets/images/pages/event/ev6.jpg" align="right" height="500px" width="800px" class="ev6">
+            <img src="./assets/images/pages/event/ev3.jpg"  class="ev3">
+            <img src="./assets/images/pages/event/ev4.jpg"  class="ev4">
+            <img src="./assets/images/pages/event/ev5.jpg"  class="ev5">
+            <img src="./assets/images/pages/event/ev6.jpg"  class="ev6">
         </div>
 
         <br><br>

@@ -912,8 +912,207 @@
     }
 
 ?>
+<style>
+/* Basic styling for the whole page */
+body {
+    font-family: 'Grandis Bold';
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
 
+/* Styling for the header */
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color:#0f52BA ;
+    color: #fff;
+    margin: 0;
+}
+
+/* Styling for the search bar */
+.search-bar {
+    text-align: center;
+    padding: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Styling for the hidden form */
+.hidden-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+/* Styling for form labels and inputs */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Styling for buttons */
+button {
+    background-color: #0f52BA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Styling for image previews */
+img#previewProfileImage,
+img#previewProfileBanner {
+    display: block;
+    margin: 10px auto;
+}
+
+/* Styling for form submission button */
+input[type="submit"] {
+    background-color: #0f52BA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Styling for the users list */
+#usersList {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+/* Styling for the "Add Announcement" button */
+#addAnnouncementButton {
+    background-color: #0f52BA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#addForumTypeButton {
+    background-color: #0f52BA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#showActiveUsersButton {
+    background-color: #0f52BA;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Styling for the search bar */
+.search-bar {
+    text-align: center;
+    padding: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Styling for the hidden form */
+.hidden-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+/* Styling for form labels and inputs */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form select,
+form textarea,
+form input[type="submit"],
+form button[type="button"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    form {
+        width: 100%;
+    }
+    
+    img#previewProfileBanner {
+        max-width: 100%;
+    }
+}
+
+
+
+  
+  
+</style>
 <div>
+    <br>
     <h1>User Moderation</h1>
     <div class="search-bar">
         <input type="text" id="searchUserInput" placeholder="Search User">
@@ -1071,6 +1270,7 @@
     </div>
 </div>
 
+<br><br>
 <div>
     <h1>Forum Moderation</h1>
     <button id="addForumTypeButton" onclick="toggleForm('addForumTypeForm')">Add Forum Topic</button><br/>
@@ -1122,6 +1322,7 @@
     </div>
 </div>
 
+<br><br>
 <div>
     <h1>Logs Moderation</h1>
     <div class="search-bar">
@@ -1147,6 +1348,7 @@
     </div>
 </div>
 
+<br><br>
 <div>
     <h1>Active Users List</h1>
     <button id="showActiveUsersButton" onclick="toggleForm('activeUsersList')">Show</button>
@@ -1155,6 +1357,7 @@
     </div>
 </div>
 
+<br><br><br><br>
 <div>
     Comments Moderation (Soon&trade;)
 </div>
@@ -1166,7 +1369,7 @@
 <div>
     Forms Moderation with visuals (Soon&trade;)
 </div>
-
+<br><br><br>
 <?php 
     //Imports Javascript
     require_once('utilities/validation/server/js-validation.php');

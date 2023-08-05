@@ -3,6 +3,14 @@ body {
     padding: 0;
   
   }
+
+  /* Responsive styling */
+@media screen and (max-width: 768px) {
+  form {
+      width: 100%;
+  }
+}
+
   @font-face {
     font-family: 'Grandis Regular';
     src: url('fonts/Grandis Regular.otf') format('opentype');

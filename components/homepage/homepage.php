@@ -17,15 +17,14 @@
    <div class="hero-gallery">
     <div class="slider">
       <img src="./assets/images/pages/homepage/image1.jpg" alt="Image 1">
-      <img src="./assets/images/pages/homepage/image2.jpeg" alt="Image 2">
-      <img src="./assets/" alt="Image 3">
-      <img src="./assets/" alt="Image 4">
+      <img src="./assets/images/pages/homepage/hp2.jpeg" alt="Image 2">
+      <img src="./assets/images/pages/homepage/hp4.jpeg" alt="Image 3">
+      <img src="./assets/images/pages/homepage/hp3.jpeg" alt="Image 4">
     </div>
 
     <div class="hero-overlay"></div>
     <div class="hero-text">
-      <h1 class="hero-heading">WELCOME TO THE BARANGAY OF STA. CRUZ</h1>
- 
+      
     </div>
     <div class="dots">
       <span class="dot"></span>

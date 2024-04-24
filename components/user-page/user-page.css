@@ -1,0 +1,160 @@
+.hidden-form {
+    display: none;
+}
+
+.profile{
+    background-color: aliceblue;
+    border: solid 5px black;
+    border-radius: 10px;
+    height: 700px;
+    width:800px;
+    margin-left: 300px;
+}
+
+.nameused{
+    font-size: 30px;
+    font-family: 'Poppins',sans-serif;
+}
+
+.desc{
+    font-size: 15px;
+    font-family: 'Poppins',sans-serif;
+}
+
+.job{
+    font-size: 15px;
+    font-family: 'Poppins',sans-serif;
+}
+
+.bts{
+    margin-top: -35px;
+}
+
+.prof img{
+    border-radius: 50%;
+    border: solid 5px black;
+    margin-top: -60px;
+}
+
+.edit{
+    color:rgb(255, 255, 255);
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-size: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 25px;
+    width: 300px;
+}
+
+.change{
+    color:rgb(255, 255, 255);
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-size: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 25px;
+    width: 300px;
+}
+
+.hidden-form1{
+    background-color: aliceblue;
+    border: solid 5px black;
+    border-radius: 10px;
+    height: 1200px;
+    width: 500px;
+    margin-left: 440px;
+}
+
+.hidden-form2{
+    background-color: aliceblue;
+    border: solid 5px black;
+    border-radius: 10px;
+    height: 400px;
+    width: 400px;
+    margin-left: 510px;
+}
+
+.subpass{
+    color:rgb(255, 255, 255);
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-size: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 25px;
+    width: 300px;
+}
+
+.edituser{
+    margin-left: 10px;
+}
+
+.boxuser{
+    border-radius: 5px;
+    border: rgb(70, 70, 70);
+}
+
+.editemail{
+    margin-left: 290px; 
+    margin-top: -85px;
+}
+
+.editfirst{
+    margin-left: 10px;
+}
+
+.editlast{
+    margin-top: -85px;
+    margin-left: 290px; 
+}
+
+.editbirth{
+    margin-left: 10px;
+}
+
+.editadd{
+    margin-left: 290px; 
+    margin-top: -85px;
+}
+
+.editcity{
+    margin-left: 10px; 
+}
+
+.editstate{
+    margin-left: 290px; 
+    margin-top: -85px;
+}
+
+.editzip{
+    margin-left: 10px;
+}
+
+.editgender{
+    margin-top: -85px;
+    margin-left: 290px; 
+}
+
+.editnum{
+    margin-left: 10px;   
+}
+
+.edittitle{
+    margin-top: -85px;
+    margin-left: 290px; 
+}
+
+.editsub{
+    color:rgb(255, 255, 255);
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    font-size: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: -500px;
+    width: 300px;
+}

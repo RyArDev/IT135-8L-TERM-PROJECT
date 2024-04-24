@@ -1,0 +1,117 @@
+.log-content{
+  background-color: #fff;
+}
+
+.login{
+    margin:auto;
+    background-color: aliceblue;
+    border: solid 1px black;
+    width:500px;
+    height:400px;
+    border-radius: 10px;
+    padding: 1%;
+    margin-top: 20px;
+}
+
+.logtext{
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+.name{
+  font-size: 18px;
+  margin-top: 23px;
+  font-family: 'Poppins',sans-serif;
+}
+
+.pass{
+  font-size: 18px;
+  font-family: 'Poppins',sans-serif;
+}
+
+.log-info{
+    text-align: center;
+    padding: 5%;
+}
+
+.log-button{
+    color:rgb(255, 255, 255);
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-size: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 25px;
+    width: 300px;
+}
+
+.log-button: hover{
+  background-color:  #0f52BA;
+  color: white;
+}
+
+.regs{
+  text-align: center;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+  }
+
+  .modal {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .not-a-member {
+    text-align: center;
+    justify-content: center;
+}
+
+.container form {
+    margin-top: 30px;
+  }
+  form .field {
+    margin-bottom: 20px;
+  }
+
+form .input-field {
+    position: relative;
+    height: 55px;
+    width: 100%;
+  }
+  .input-field input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    padding: 0 15px;
+    border: 1px solid #d1d1d1;
+  }
+  
